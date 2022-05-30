@@ -7,12 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 
 @Entity
-@Getter
+@Data
 @NoArgsConstructor
 @Table(name = "tb_friend")
 public class Friend {
@@ -28,9 +29,40 @@ public class Friend {
 	private String regDtm; 
 	
 	@Column (name = "mod_dtm")
-	private String modDtm; 
-	
-	public String toString() {
-		return String.format("%d, '%s', '%s', '%s']", frndSeq, frndNm, regDtm, modDtm);
+	private String modDtm;
+
+	public long getFrndSeq() {
+		return frndSeq;
 	}
+
+	public void setFrndSeq(long frndSeq) {
+		this.frndSeq = frndSeq;
+	}
+
+	public String getFrndNm() {
+		return frndNm;
+	}
+
+	public void setFrndNm(String frndNm) {
+		this.frndNm = frndNm;
+	}
+
+	public String getRegDtm() {
+		return regDtm;
+	}
+
+	public void setRegDtm(String regDtm) {
+		this.regDtm = regDtm;
+	}
+
+	public String getModDtm() {
+		return modDtm;
+	}
+
+	public void setModDtm(String modDtm) {
+		this.modDtm = modDtm;
+	} 
+	
+	
+	
 }

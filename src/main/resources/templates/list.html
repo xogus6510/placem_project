@@ -18,19 +18,28 @@ th, td {
 </head>
 <body>
 	<h1 th:text="${msg}"></h1>
-	<h1 th:text="${friendlist}"></h1>
+	<span th:text="${#lists.size(friendlist)}"></span>
+
 	<table>
 		<tr>
 			<th>순번</th>
 			<th>지인이름</th>
+			<th>전화 수</th>
 			<th>등록일시</th>
 			<th>수정일시</th>
+			<th>업무</th>
 		</tr>
+		<td colspan="6" th:if="${#lists.size(friendlist)== 0}">지인 목록 결과가 없습니다.</td>
 		<tr th:each="flist : ${friendlist}">
 			<td th:text="${flist.frndSeq}"></td>
 			<td th:text="${flist.frndNm}"></td>
+			<td></td>
 			<td th:text="${flist.regDtm}"></td>
 			<td th:text="${flist.modDtm}"></td>
+			<td>수정 / 삭제</td>
+		</tr>
+		<tr>
+			<td colspan="6">등록</td>
 		</tr>
 	</table>
 

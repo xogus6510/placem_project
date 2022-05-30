@@ -1,10 +1,12 @@
 package com.placem.phonebook.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.placem.phonebook.entity.Friend;
 import com.placem.phonebook.repository.FriendRepository;
@@ -13,7 +15,7 @@ import com.placem.phonebook.repository.FriendRepository;
 public class FriendController {
 
 	@Autowired
-	FriendRepository repository;
+	private FriendRepository repository;
 
 	@GetMapping("/findall")
 	public String findAll() {
@@ -28,8 +30,11 @@ public class FriendController {
 	
 	@GetMapping("/list")
 	public String list(Model model) throws Exception {
-	System.out.println(repository.findAll());
-	model.addAttribute("friendlist", repository.findAll());
+	List<Friend> friend = repository.findAll();
+	System.out.println(friend);
+	ModelAndView mv = new ModelAndView();
+	//mv.addObject("friendlist",  friend);
+	model.addAttribute("friendlist", friend);
 	model.addAttribute("msg", "Hello world");
 	 return "list";
 	}
