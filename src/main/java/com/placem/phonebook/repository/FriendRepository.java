@@ -6,9 +6,9 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.placem.phonebook.entity.Friend;
 
-public interface FrindRepository extends CrudRepository <Friend, Long> {
+public interface FriendRepository extends CrudRepository <Friend, Long> {
 
-	List <Friend> findByFrndSeq(long frndSeq);	
+	List <Friend> findByAa(long aa);	
 	
 	List <Friend> findByFrndNm(String frndNm);
 	
