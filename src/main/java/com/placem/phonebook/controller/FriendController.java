@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.placem.phonebook.entity.Friend;
@@ -38,6 +39,22 @@ public class FriendController {
 	model.addAttribute("msg", "Hello world");
 	 return "list";
 	}
+	
+	@GetMapping("/registration")
+	public String registration(Model model) throws Exception {
+	model.addAttribute("msg", "Hello world");
+	 return "registration";
+	}
+	
+	@GetMapping ("/add")
+	public String addFriend() {
+		
+		//repository.save(1);
+		
+		return "Addition done!"; 
+	}
+	
+	
 	
 	/*@GetMapping("/findbyid")
 	public String findById(@RequestParam("id") long id) {

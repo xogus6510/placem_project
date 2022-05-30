@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="[http://www.thymeleaf.org](http://www.thymeleaf.org/)">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>홈페이지</title>
+<style>
+table {
+	width: 100%;
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #444444;
+}
+</style>
+</head>
+<body>
+	<form>
+		<table>
+			<tr>
+				<th>지인이름</th>
+				<th><input type="text"></th>
+			</tr>
+			<tr>
+				<th>전화구분</th>
+				<th><select>
+						<option value="1">집</option>
+						<option value="2">휴대폰</option>
+						<option value="3">회사</option>
+						<option value="4">학교</option>
+						<option value="5">FAX</option>
+				</select></th>
+			</tr>
+			<tr>
+				<th>전화번호</th>
+				<th><input type="text"> - <input type="text"> -
+					<input type="text"></th>
+			</tr>
+			<tr>
+				<th colspan="2"><button type="button"
+						onClick="location.href='/save'">저장</button> /
+					<button type="button" onClick="location.href='/list'">취소</button></th>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
