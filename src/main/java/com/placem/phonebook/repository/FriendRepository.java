@@ -8,7 +8,7 @@ import com.placem.phonebook.entity.Friend;
 
 public interface FriendRepository extends CrudRepository <Friend, Long> {
 
-	List <Friend> findByAa(long aa);	
+	List <Friend> findByFrndSeq(long frndSeq);	
 	
 	List <Friend> findByFrndNm(String frndNm);
 	

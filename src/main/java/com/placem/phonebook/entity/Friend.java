@@ -14,13 +14,12 @@ import lombok.ToString;
 @Entity
 @Getter
 @NoArgsConstructor
-@ToString
 @Table(name = "tb_friend")
 public class Friend {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long aa; 
+	private long frndSeq; 
 	
 	@Column (name = "frnd_nm")
 	private String frndNm;
@@ -31,4 +30,7 @@ public class Friend {
 	@Column (name = "mod_dtm")
 	private String modDtm; 
 	
+	public String toString() {
+		return String.format("%d, '%s', '%s', '%s']", frndSeq, frndNm, regDtm, modDtm);
+	}
 }
