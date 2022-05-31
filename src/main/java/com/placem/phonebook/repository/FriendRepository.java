@@ -1,9 +1,11 @@
 package com.placem.phonebook.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.placem.phonebook.entity.BaseEntity;
 import com.placem.phonebook.entity.Friend;
 
 public interface FriendRepository extends JpaRepository <Friend, Long> {
@@ -12,8 +14,8 @@ public interface FriendRepository extends JpaRepository <Friend, Long> {
 	
 	List <Friend> findByFrndNm(String frndNm);
 	
-	List <Friend> findByRegDtm(String regDtm);
+	List <BaseEntity> findByCreatedDate(LocalDateTime createdDate);
 	
-	List <Friend> findByModDtm(String modDtm);
+	List <BaseEntity> findByModifiedDate(LocalDateTime modifiedDate);
 	
 }

@@ -18,17 +18,6 @@ public class FriendController {
 
 	@Autowired
 	private FriendRepository repository;
-
-	@GetMapping("/findall")
-	public String findAll() {
-		String result = "";
-
-		for (Friend friend : repository.findAll()) {
-			result += friend.toString() + "</br>";
-		}
-
-		return result;
-	}
 	
 	@GetMapping("/list")
 	public String list(Model model) throws Exception {
