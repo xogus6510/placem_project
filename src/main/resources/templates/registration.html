@@ -17,15 +17,15 @@ th, td {
 </style>
 </head>
 <body>
-	<form>
-		<table>
+	<form action="/add" name="addform" >
+		<table >
 			<tr>
 				<th>지인이름</th>
-				<th><input type="text"></th>
+				<th><input type="text" name ="frndNm"></th>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<th>전화구분</th>
-				<th><select>
+				<th><select name ="place" onChange="addform.submit()">
 						<option value="1">집</option>
 						<option value="2">휴대폰</option>
 						<option value="3">회사</option>
@@ -35,11 +35,11 @@ th, td {
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<th><input type="text"> - <input type="text"> -
-					<input type="text"></th>
-			</tr>
+				<th><input type="text" name ="num1"> - <input type="text" name ="num2"> -
+					<input type="text" name ="num3"></th>
+			</tr> -->
 			<tr>
-				<th colspan="2"><button type="button"
+				<th colspan="2"><button type="submit"
 						onClick="location.href='/save'">저장</button> /
 					<button type="button" onClick="location.href='/list'">취소</button></th>
 			</tr>

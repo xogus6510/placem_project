@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,9 +48,9 @@ public class FriendController {
 	}
 	
 	@GetMapping ("/add")
-	public String addFriend() {
+	public String addFriend(@ModelAttribute Friend friend) {
 		
-		//repository.save(1);
+		repository.save(friend);
 		
 		return "Addition done!"; 
 	}
