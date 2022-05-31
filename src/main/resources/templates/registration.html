@@ -6,7 +6,7 @@
 <title>홈페이지</title>
 <style>
 table {
-	width: 100%;
+	margin: auto;
 	border: 1px solid #444444;
 	border-collapse: collapse;
 }
@@ -17,27 +17,27 @@ th, td {
 </style>
 </head>
 <body>
-	<form action="/add" name="addform" >
-		<table >
+	<form action="/add" name="addform">
+		<table>
 			<tr>
 				<th>지인이름</th>
-				<th><input type="text" name ="frndNm"></th>
+				<th><input type="text" name="frndNm"></th>
 			</tr>
-			<!-- <tr>
+			<tr>
 				<th>전화구분</th>
-				<th><select name ="place" onChange="addform.submit()">
-						<option value="1">집</option>
-						<option value="2">휴대폰</option>
-						<option value="3">회사</option>
-						<option value="4">학교</option>
-						<option value="5">FAX</option>
+				<th><select name ="telType" >
+						<option value="집">집</option>
+						<option value="휴대폰">휴대폰</option>
+						<option value="회사">회사</option>
+						<option value="학교">학교</option>
+						<option value="FAX">FAX</option>
 				</select></th>
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<th><input type="text" name ="num1"> - <input type="text" name ="num2"> -
-					<input type="text" name ="num3"></th>
-			</tr> -->
+				<th><input type="text" name ="telNo1"> - <input type="text" name ="telNo2"> -
+					<input type="text" name ="telNo3"></th>
+			</tr>
 			<tr>
 				<th colspan="2"><button type="submit"
 						onClick="location.href='/save'">저장</button> /

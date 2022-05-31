@@ -7,17 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.placem.phonebook.entity.Friend;
+import com.placem.phonebook.entity.Phone;
 import com.placem.phonebook.repository.FriendRepository;
+import com.placem.phonebook.repository.PhoneRepository;
 
 @Controller
 public class FriendController {
 
 	@Autowired
 	private FriendRepository repository;
+	
+	@Autowired
+	private PhoneRepository repository2;
 	
 	@GetMapping("/list")
 	public String list(Model model) throws Exception {
@@ -26,7 +30,7 @@ public class FriendController {
 	ModelAndView mv = new ModelAndView();
 	//mv.addObject("friendlist",  friend);
 	model.addAttribute("friendlist", friend);
-	model.addAttribute("msg", "Hello world");
+	model.addAttribute("msg", "test");
 	 return "list";
 	}
 	
@@ -37,11 +41,12 @@ public class FriendController {
 	}
 	
 	@GetMapping ("/add")
-	public String addFriend(@ModelAttribute Friend friend) {
+	public String addFriend(@ModelAttribute Friend friend, Phone phone) {
 		
 		repository.save(friend);
+		repository2.save(phone);
 		
-		return "Addition done!"; 
+		return "redirect:/list"; 
 	}
 	
 	
