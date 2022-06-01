@@ -26,8 +26,16 @@ public class Phone extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long telSeq; 
 	
-	@Column (name = "frnd_seq")
-	private String frndSeq;
+	@ManyToOne
+	@JoinColumn(name="frnd_seq")
+	private Friend friend;
+	
+	public void setFriend(Friend friend) {
+		this.friend =friend;
+	}
+	
+	//@Column (name = "frnd_seq")
+	//private String frndSeq;
 	
 	@Column (name = "tel_type")
 	private String telType;
@@ -40,9 +48,7 @@ public class Phone extends BaseEntity {
 	
 	@Column (name = "tel_no_3")
 	private int telNo3;
-	
 
-    
 	
 		
 }
