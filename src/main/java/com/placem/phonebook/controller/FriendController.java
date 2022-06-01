@@ -2,6 +2,11 @@ package com.placem.phonebook.controller;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +27,11 @@ public class FriendController {
 	
 	@Autowired
 	private PhoneRepository repository2;
+	
+	@PersistenceUnit
+	EntityManagerFactory emf;
+	@PersistenceContext
+	EntityManager em;
 	
 	@GetMapping("/list")
 	public String list(Model model) throws Exception {
@@ -44,6 +54,7 @@ public class FriendController {
 	public String addFriend(@ModelAttribute Friend friend, Phone phone) {
 		
 		repository.save(friend);
+		phone.setFriend(friend);
 		repository2.save(phone);
 		
 		return "redirect:/list"; 
