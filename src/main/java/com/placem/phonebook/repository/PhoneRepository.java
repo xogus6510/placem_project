@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.placem.phonebook.entity.BaseEntity;
-import com.placem.phonebook.entity.Friend;
 import com.placem.phonebook.entity.Phone;
 
 public interface PhoneRepository extends JpaRepository <Phone, Long> {
@@ -24,5 +24,6 @@ public interface PhoneRepository extends JpaRepository <Phone, Long> {
 	List <BaseEntity> findByCreatedDate(LocalDateTime createdDate);
 	
 	List <BaseEntity> findByModifiedDate(LocalDateTime modifiedDate);
+
 	
 }

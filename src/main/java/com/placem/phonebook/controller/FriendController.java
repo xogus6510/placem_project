@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.placem.phonebook.entity.Friend;
@@ -60,7 +62,12 @@ public class FriendController {
 		return "redirect:/list"; 
 	}
 	
-	
+	@RequestMapping("/delete")
+	public String deleteMember(@RequestParam("frndseq") long frndseq) throws Exception {
+		repository.deleteById(frndseq);
+		//repository2.deleteById(frndseq);
+		return "redirect:/list";
+	}
 	
 	/*@GetMapping("/findbyid")
 	public String findById(@RequestParam("id") long id) {
