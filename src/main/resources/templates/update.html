@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="[http://www.thymeleaf.org](http://www.thymeleaf.org/)">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>홈페이지</title>
+<style>
+table {
+	margin: auto;
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #444444;
+}
+</style>
+</head>
+<body>
+<h1>지인 수정</h1>
+	<form action="/update" name="updateform">
+		<table>
+			<tr><td>지인 이름</td><td><input type="text" name ="update"></td></tr>
+			<tr><td colspan="2"><button type="button"  onClick="location.href='/1'">저장</button><button type="button"  onClick="location.href='/2'">취소</button></td></tr>
+		</table>
+	</form>
+</body>
+</html>

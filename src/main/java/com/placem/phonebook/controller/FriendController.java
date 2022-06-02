@@ -52,6 +52,12 @@ public class FriendController {
 	 return "registration";
 	}
 	
+	@GetMapping ("/update")
+	public String updateFriend() {
+		
+		return "update"; 
+	}
+	
 	@GetMapping ("/add")
 	public String addFriend(@ModelAttribute Friend friend, Phone phone) {
 		
@@ -64,7 +70,15 @@ public class FriendController {
 	
 	@RequestMapping("/delete")
 	public String deleteMember(@RequestParam("frndseq") long frndseq) throws Exception {
-		repository.deleteById(frndseq);
+		 //frndSeq 로 Friend를 얻는다.
+	     Friend friend = repository.findById(frndseq).orElse(null);
+	     List<Phone> phoneList = repository2.findAllByFriend(friend);
+	     System.out.println(friend + "11111111111");
+	     System.out.println(phoneList + "2222222222");
+	     repository2.deleteAll(phoneList);
+	     repository.deleteById(frndseq);
+		//repository2.deleteByFrndSeq(frndseq);
+		//repository2.deleteByFriend(frndseq);
 		//repository2.deleteById(frndseq);
 		return "redirect:/list";
 	}

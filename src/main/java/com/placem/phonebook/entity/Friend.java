@@ -23,13 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "tb_friend")
 public class Friend extends BaseEntity {
-	
-	//@PersistenceUnit
-	//EntityManagerFactory emf;
-	//@PersistenceContext
-	//EntityManager em;
-
-	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long frndSeq; 
