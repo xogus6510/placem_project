@@ -72,6 +72,9 @@ public class FriendController {
 	
 	@RequestMapping("/updatesave")
 	public String deleteMember(@RequestParam("frndseq") long frndseq, @RequestParam("frndNm") String frndNm) throws Exception {
+		 Friend friend = friendrepository.findById(frndseq).orElse(null);
+		friend.setFrndNm(frndNm);
+		friendrepository.save(friend);
 		System.out.println(frndseq + frndNm);
 		return "redirect:/list";
 	}
@@ -79,8 +82,8 @@ public class FriendController {
 	@GetMapping ("/add")
 	public String addFriend(@ModelAttribute Friend friend, Phone phone) {
 		friendrepository.save(friend);
-		phone.setFriend(friend);
-		phonerepository.save(phone);
+		//phone.setFriend(friend);
+		//phonerepository.save(phone);
 		return "redirect:/list"; 
 	}
 	
