@@ -18,10 +18,10 @@ th, td {
 </head>
 <body>
 <h1>지인 수정</h1>
-	<form action="/updatesave" name="updateform">
+	<form action="/update" name="updateform">
 		<table>
-			<tr><td>지인 이름</td><td><input type="text" name ="update"><input type="hidden" name ="frndseq"  th:value = "${frndseq}"></td></tr>
-			<tr><td colspan="2"><button type="submit" >저장</button><button type="button"  onClick="location.href='/list'">취소</button></td></tr>
+			<tr><td>지인 이름</td><td><input type="text" name ="update"></td></tr>
+			<tr><td colspan="2"><button type="button"  onClick="location.href='/1'">저장</button><button type="button"  onClick="location.href='/2'">취소</button></td></tr>
 		</table>
 	</form>
 </body>

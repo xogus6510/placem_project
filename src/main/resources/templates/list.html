@@ -36,7 +36,7 @@ th, td {
 			<td></td>
 			<td th:text="${flist.createdDate}"></td>
 			<td th:text="${flist.modifiedDate}"></td>
-			<td><button type="button"  onClick="location.href='/update'">수정</button><button type="button"  th:onclick="'location.href=\'/delete?frndseq='+ @{${flist.frndSeq}} + '\''">삭제</button></td>
+			<td><button type="button"  th:onclick="'location.href=\'/update?frndseq='+ @{${flist.frndSeq}} + '\''">수정</button><button type="button"  th:onclick="'location.href=\'/delete?frndseq='+ @{${flist.frndSeq}} + '\''">삭제</button></td>
 		</tr>
 		<tr>
 			<td colspan="6"><button type="button"  onClick="location.href='/registration'">등록</button></td>

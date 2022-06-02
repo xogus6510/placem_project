@@ -25,10 +25,10 @@ import com.placem.phonebook.repository.PhoneRepository;
 public class FriendController {
 
 	@Autowired
-	private FriendRepository repository;
+	private FriendRepository friendrepository;
 	
 	@Autowired
-	private PhoneRepository repository2;
+	private PhoneRepository phonerepository;
 	
 	@PersistenceUnit
 	EntityManagerFactory emf;
@@ -37,12 +37,10 @@ public class FriendController {
 	
 	@GetMapping("/list")
 	public String list(Model model) throws Exception {
-	List<Friend> friend = repository.findAll();
-	System.out.println(friend);
+	List<Friend> friend = friendrepository.findAll();
 	ModelAndView mv = new ModelAndView();
-	//mv.addObject("friendlist",  friend);
 	model.addAttribute("friendlist", friend);
-	model.addAttribute("msg", "test");
+	//model.addAttribute("msg", "test");
 	 return "list";
 	}
 	
@@ -53,87 +51,37 @@ public class FriendController {
 	}
 	
 	@GetMapping ("/update")
-	public String updateFriend() {
-		
-		return "update"; 
+	public ModelAndView content(@RequestParam("frndseq") long frndseq) {
+	    ModelAndView mv = new ModelAndView();
+	    mv.setViewName("/update"); 
+	    mv.addObject("frndseq", frndseq); 
+	    return mv;
 	}
+	
+	//@GetMapping ("/updatesave")
+	//public ModelAndView content(@RequestParam("frndseq") long frndseq) {
+	    //ModelAndView mv = new ModelAndView();
+	    //mv.setViewName("/update"); 
+	   // mv.addObject("frndseq", frndseq); 
+	  //  return mv;
+	//}
 	
 	@GetMapping ("/add")
 	public String addFriend(@ModelAttribute Friend friend, Phone phone) {
 		
-		repository.save(friend);
+		friendrepository.save(friend);
 		phone.setFriend(friend);
-		repository2.save(phone);
+		phonerepository.save(phone);
 		
 		return "redirect:/list"; 
 	}
 	
 	@RequestMapping("/delete")
 	public String deleteMember(@RequestParam("frndseq") long frndseq) throws Exception {
-		 //frndSeq 로 Friend를 얻는다.
-	     Friend friend = repository.findById(frndseq).orElse(null);
-	     List<Phone> phoneList = repository2.findAllByFriend(friend);
-	     System.out.println(friend + "11111111111");
-	     System.out.println(phoneList + "2222222222");
-	     repository2.deleteAll(phoneList);
-	     repository.deleteById(frndseq);
-		//repository2.deleteByFrndSeq(frndseq);
-		//repository2.deleteByFriend(frndseq);
-		//repository2.deleteById(frndseq);
+	     Friend friend = friendrepository.findById(frndseq).orElse(null);
+	     List<Phone> phoneList = phonerepository.findAllByFriend(friend);
+	     phonerepository.deleteAll(phoneList);
+	     friendrepository.deleteById(frndseq);
 		return "redirect:/list";
 	}
-	
-	/*@GetMapping("/findbyid")
-	public String findById(@RequestParam("id") long id) {
-		String result = "";
-
-		for (Member member : repository.findById(id)) {
-			result += member.toString() + "</br>";
-		}
-
-		return result;
-	}
-
-	@GetMapping("/findbylastname")
-	public String findById(@RequestParam("lastname") String lastName) {
-		String result = "";
-
-		for (Member member : repository.findByLastName(lastName)) {
-			result += member.toString() + "</br>";
-		}
-
-		return result;
-	}
-
-	@GetMapping("/add")
-	public String addMember(@RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName,
-			@RequestParam("email") String email) {
-
-		repository.save(new Member(firstName, lastName, email));
-
-		return "Addition done!";
-	}
-
-	@GetMapping("/update")
-	public String updateMember(@RequestParam("id") long id, @RequestParam("firstname") String firstName,
-			@RequestParam("lastname") String lastName, @RequestParam("email") String email) {
-
-		Member member = repository.findById(id).get(0);
-
-		member.setFirstName(firstName);
-		member.setLastName(lastName);
-		member.setEmail(email);
-		repository.save(member);
-
-		return "Update done!";
-	}
-
-	@GetMapping("/delete")
-	public String deleteMember(@RequestParam("id") long id) {
-
-		repository.deleteById(id);
-
-		return "Delete done!";
-	}*/
-
 }
