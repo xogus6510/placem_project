@@ -29,4 +29,5 @@ public interface PhoneRepository extends JpaRepository <Phone, Long> {
 	//List <Phone> deleteByFriend(Friend friend);
 
 	List<Phone> findAllByFriend(Friend friend);
+	List<Phone> findByFriend(Friend friend);
 }

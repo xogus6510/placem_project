@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="[http://www.thymeleaf.org](http://www.thymeleaf.org/)">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>홈페이지</title>
+<style>
+table {
+	margin: auto;
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #444444;
+}
+</style>
+</head>
+<body>
+	<h1>전화목록</h1>
+	<h1 th:text="${frndNm}"></h1>
+	<table>
+		<tr>
+			<th>순번</th>
+			<th>전화 구분</th>
+			<th>전화 번호</th>
+			<th>등록일시</th>
+			<th>수정일시</th>
+			<th>업무</th>
+		</tr>
+		<td colspan="6" th:if="${#lists.size(friend)== 0}">지인 목록 결과가 없습니다.</td>
+		<tr th:each="plist : ${friend}">
+			<td th:text="${plist.telSeq}"></td>
+			<td th:text="${plist.telType}"></td>
+			<td><span th:text="${plist.telNo1}" />-<span
+				th:text="${plist.telNo2}" />-<span th:text="${plist.telNo3}" /></td>
+			<td th:text="${plist.createdDate}"></td>
+			<td th:text="${plist.modifiedDate}"></td>
+			<td><button type="button"  >수정</button><button type="button"  >삭제</button></td>
+		</tr>
+
+	</table>
+
+</body>
+</html>

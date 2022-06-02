@@ -31,6 +31,10 @@ public class Friend extends BaseEntity {
 	@Column (name = "frnd_nm")
 	private String frndNm;
 	
+	 // public void update(String frndNm) {
+	 //       this.frndNm = frndNm;
+	 //  }
+	
 	//@ManyToOne
 	//private Phone phone;
 	

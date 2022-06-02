@@ -50,29 +50,37 @@ public class FriendController {
 	 return "registration";
 	}
 	
+	@GetMapping ("/detail")
+	public ModelAndView content(@RequestParam("frndNm") String frndNm, @RequestParam("frndseq") Friend frndseq ) {
+	    ModelAndView mv = new ModelAndView();
+	    mv.setViewName("/detail"); 
+	    mv.addObject("frndNm", frndNm); 
+	    mv.addObject("frndseq", frndseq); 
+	    List<Phone> friend = phonerepository.findByFriend(frndseq);
+	    System.out.println(friend);
+	    mv.addObject("friend", friend); 
+	    return mv;
+	}
+	
 	@GetMapping ("/update")
-	public ModelAndView content(@RequestParam("frndseq") long frndseq) {
+	public ModelAndView update(@RequestParam("frndseq") long frndseq) {
 	    ModelAndView mv = new ModelAndView();
 	    mv.setViewName("/update"); 
 	    mv.addObject("frndseq", frndseq); 
 	    return mv;
 	}
 	
-	//@GetMapping ("/updatesave")
-	//public ModelAndView content(@RequestParam("frndseq") long frndseq) {
-	    //ModelAndView mv = new ModelAndView();
-	    //mv.setViewName("/update"); 
-	   // mv.addObject("frndseq", frndseq); 
-	  //  return mv;
-	//}
+	@RequestMapping("/updatesave")
+	public String deleteMember(@RequestParam("frndseq") long frndseq, @RequestParam("frndNm") String frndNm) throws Exception {
+		System.out.println(frndseq + frndNm);
+		return "redirect:/list";
+	}
 	
 	@GetMapping ("/add")
 	public String addFriend(@ModelAttribute Friend friend, Phone phone) {
-		
 		friendrepository.save(friend);
 		phone.setFriend(friend);
 		phonerepository.save(phone);
-		
 		return "redirect:/list"; 
 	}
 	
