@@ -82,8 +82,8 @@ public class FriendController {
 	@GetMapping ("/add")
 	public String addFriend(@ModelAttribute Friend friend, Phone phone) {
 		friendrepository.save(friend);
-		//phone.setFriend(friend);
-		//phonerepository.save(phone);
+		phone.setFriend(friend);
+		phonerepository.save(phone);
 		return "redirect:/list"; 
 	}
 	
