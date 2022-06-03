@@ -35,7 +35,7 @@ public class FriendController {
 	@PersistenceContext
 	EntityManager em;
 
-	//전화번호부 목록
+	// 전화번호부 목록
 	@GetMapping("/list")
 	public String list(Model model) throws Exception {
 		List<Friend> friend = friendrepository.findAll();
@@ -43,26 +43,27 @@ public class FriendController {
 		return "list";
 	}
 
-	//지인 전화번호 등록
+	// 지인 전화번호 등록
 	@GetMapping("/registration")
 	public String registration(Model model) throws Exception {
 		model.addAttribute("msg", "Hello world");
 		return "registration";
 	}
-	
-	//개별 전화번호 등록
-		@GetMapping("/detailregistration")
-		public ModelAndView detailregistration(@RequestParam("frndseq") long frndseq, @RequestParam("frndNm") String frndNm) throws Exception {
-			ModelAndView mv = new ModelAndView();
-			mv.setViewName("/detailregistration");
-			mv.addObject("frndNm", frndNm);
-			mv.addObject("frndseq", frndseq);
-			System.out.println(frndseq);
-			System.out.println(frndNm +"++++++++");
-			return mv;
-		}
 
-	//개별 전화번호 목록
+	// 개별 전화번호 등록
+	@GetMapping("/detailregistration")
+	public ModelAndView detailregistration(@RequestParam("frndseq") long frndseq, @RequestParam("frndNm") String frndNm)
+			throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/detailregistration");
+		mv.addObject("frndNm", frndNm);
+		mv.addObject("frndseq", frndseq);
+		System.out.println(frndseq);
+		System.out.println(frndNm + "++++++++");
+		return mv;
+	}
+
+	// 개별 전화번호 목록
 	@GetMapping("/detail")
 	public ModelAndView detail(@RequestParam("frndNm") String frndNm, @RequestParam("frndseq") Friend frndseq) {
 		ModelAndView mv = new ModelAndView();
@@ -75,7 +76,7 @@ public class FriendController {
 		return mv;
 	}
 
-	//지인 이름 수정 페이지
+	// 지인 이름 수정 페이지
 	@GetMapping("/update")
 	public ModelAndView update(@RequestParam("frndseq") long frndseq) {
 		ModelAndView mv = new ModelAndView();
@@ -84,9 +85,20 @@ public class FriendController {
 		return mv;
 	}
 
-	//지인 이름 수정
+	// 개별 전화 수정 페이지
+	@GetMapping("/detailupdate")
+	public ModelAndView detailupdate(@RequestParam("telSeq") long telSeq, @RequestParam("frndNm") String frndNm, @RequestParam("frndseq") Friend frndseq) {
+		System.out.println(telSeq + "=========");
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("frndNm", frndNm);
+		mv.addObject("frndseq", frndseq.getFrndSeq());
+		mv.setViewName("/detailupdate");
+		return mv;
+	}
+
+	// 지인 이름 수정
 	@GetMapping("/updatesave")
-	public String deleteMember(@RequestParam("frndseq") long frndseq, @RequestParam("frndNm") String frndNm)
+	public String updatesave(@RequestParam("frndseq") long frndseq, @RequestParam("frndNm") String frndNm)
 			throws Exception {
 		Friend friend = friendrepository.findById(frndseq).orElse(null);
 		friend.setFrndNm(frndNm);
@@ -95,7 +107,14 @@ public class FriendController {
 		return "redirect:/list";
 	}
 
-	//전화번호 정보 등록 후 저장버튼 클릭
+	// 개별 전화 수정
+	@GetMapping("/detailupdatesave")
+	public String detailupdatesave() throws Exception {
+
+		return "redirect:/list";
+	}
+
+	// 전화번호 정보 등록 후 저장버튼 클릭
 	@GetMapping("/add")
 	public String addFriend(@ModelAttribute Friend friend, Phone phone) {
 		friendrepository.save(friend);
@@ -103,17 +122,17 @@ public class FriendController {
 		phonerepository.save(phone);
 		return "redirect:/list";
 	}
-	
-	
-	//개별 전화번호 정보 등록 후 저장버튼 클릭
-		@GetMapping("/detailadd")
-		public String detailaddFriend(@ModelAttribute Phone phone, @RequestParam("friend") Friend friend, @RequestParam("frndNm") String frndNm) {
-			phonerepository.save(phone);
-			System.out.println(frndNm +"=================");
-			return "redirect:/detail?frndNm="+ frndNm +"&frndseq=" + friend.getFrndSeq();
-		}
 
-	//지인 목록에서 데이터 삭제
+	// 개별 전화번호 정보 등록 후 저장버튼 클릭
+	@GetMapping("/detailadd")
+	public String detailaddFriend(@ModelAttribute Phone phone, @RequestParam("friend") Friend friend,
+			@RequestParam("frndNm") String frndNm) {
+		phonerepository.save(phone);
+		System.out.println(frndNm + "=================");
+		return "redirect:/detail?frndNm=" + frndNm + "&frndseq=" + friend.getFrndSeq();
+	}
+
+	// 지인 목록에서 데이터 삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam("frndseq") long frndseq) throws Exception {
 		Friend friend = friendrepository.findById(frndseq).orElse(null);
@@ -123,11 +142,10 @@ public class FriendController {
 		return "redirect:/list";
 	}
 
-	//전화 목록에서 데이터 삭제
+	// 전화 목록에서 데이터 삭제
 	@GetMapping("/detaildelete")
 	public String detaildelete(@RequestParam("telSeq") long telSeq, @RequestParam("frndNm") String frndNm,
 			@RequestParam("frndseq") long frndseq) throws Exception {
-		System.out.println(telSeq + "/" + frndNm + "/" + frndseq + "===========");
 		phonerepository.deleteById(telSeq);
 		return "redirect:/detail?frndNm=" + frndNm + "&frndseq=" + frndseq;
 	}

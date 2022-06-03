@@ -38,7 +38,7 @@ th, td {
 				th:text="${plist.telNo2}" />-<span th:text="${plist.telNo3}" /></td>
 			<td th:text="${plist.createdDate}"></td>
 			<td th:text="${plist.modifiedDate}"></td>
-			<td><button type="button">수정</button>
+			<td><button type="button" th:onclick="'location.href=\'/detailupdate?telSeq='+ @{${plist.telSeq}} + '&frndNm='+ @{${frndNm}} + '&frndseq='+ @{${frndseq.frndSeq}} + '\''">수정</button>
 				<button type="button" th:onclick="'location.href=\'/detaildelete?telSeq='+ @{${plist.telSeq}} + '&frndNm='+ @{${frndNm}} + '&frndseq='+ @{${frndseq.frndSeq}} + '\''">삭제</button></td>
 		</tr>
 		<tr>
