@@ -104,13 +104,13 @@ public class FriendController {
 		return "redirect:/list";
 	}
 	
+	
 	//개별 전화번호 정보 등록 후 저장버튼 클릭
 		@GetMapping("/detailadd")
-		public String detailaddFriend(@ModelAttribute Friend friend, Phone phone) {
-			friendrepository.save(friend);
-			phone.setFriend(friend);
+		public String detailaddFriend(@ModelAttribute Phone phone, @RequestParam("friend") Friend friend, @RequestParam("frndNm") String frndNm) {
 			phonerepository.save(phone);
-			return "redirect:/list";
+			System.out.println(frndNm +"=================");
+			return "redirect:/detail?frndNm="+ frndNm +"&frndseq=" + friend.getFrndSeq();
 		}
 
 	//지인 목록에서 데이터 삭제

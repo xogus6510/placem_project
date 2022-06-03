@@ -20,6 +20,8 @@ th, td {
 <body>
 	<h1>지인 등록</h1>
 	<form action="/detailadd" name="addform">
+		<input type="hidden" name="friend" th:value="${frndseq}"/>
+		<input type="hidden" name="frndNm" th:value="${frndNm}"/>
 		<table>
 			<tr>
 				<th>전화구분</th>
