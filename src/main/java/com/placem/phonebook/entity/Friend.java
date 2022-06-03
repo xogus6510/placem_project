@@ -1,5 +1,6 @@
 package com.placem.phonebook.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,8 +32,10 @@ public class Friend extends BaseEntity {
 	@Column (name = "frnd_nm")
 	private String frndNm;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="friend", cascade = CascadeType.ALL, orphanRemoval = true)
-	   private List<Phone> phone;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="friend")
+	  private List<Phone> phone = new ArrayList<Phone>();
+	
+	
 	
 	 // public void update(String frndNm) {
 	 //       this.frndNm = frndNm;
