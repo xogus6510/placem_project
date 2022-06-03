@@ -41,13 +41,13 @@ public class Phone extends BaseEntity {
 	private String telType;
 	
 	@Column (name = "tel_no_1")
-	private int telNo1;
+	private String telNo1;
 	
 	@Column (name = "tel_no_2")
-	private int telNo2;
+	private String telNo2;
 	
 	@Column (name = "tel_no_3")
-	private int telNo3;
+	private String telNo3;
 
 	
 		

@@ -1,14 +1,15 @@
 package com.placem.phonebook.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -31,14 +32,10 @@ public class Friend extends BaseEntity {
 	@Column (name = "frnd_nm")
 	private String frndNm;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="friend", cascade = CascadeType.ALL, orphanRemoval = true)
+	   private List<Phone> phone;
+	
 	 // public void update(String frndNm) {
 	 //       this.frndNm = frndNm;
-	 //  }
-	
-	//@ManyToOne
-	//private Phone phone;
-	
-	
-	
-	
+	 //  }	
 }

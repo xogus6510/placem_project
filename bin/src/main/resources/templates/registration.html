@@ -17,7 +17,7 @@ th, td {
 </style>
 </head>
 <body>
-<h1>지인 등록</h1>
+	<h1>지인 등록</h1>
 	<form action="/add" name="addform">
 		<table>
 			<tr>
@@ -26,7 +26,8 @@ th, td {
 			</tr>
 			<tr>
 				<th>전화구분</th>
-				<th><select name ="telType" >
+				<th><select name="telType">
+						<option value="">선택</option>
 						<option value="집">집</option>
 						<option value="휴대폰">휴대폰</option>
 						<option value="회사">회사</option>
@@ -36,8 +37,9 @@ th, td {
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<th><input type="text" name ="telNo1"> - <input type="text" name ="telNo2"> -
-					<input type="text" name ="telNo3"></th>
+				<th><input type="text" name="telNo1"> - <input
+					type="text" name="telNo2"> - <input type="text"
+					name="telNo3"></th>
 			</tr>
 			<tr>
 				<th colspan="2"><button type="submit"

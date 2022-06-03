@@ -32,11 +32,11 @@ th, td {
 		<td colspan="6" th:if="${#lists.size(friendlist)== 0}">지인 목록 결과가 없습니다.</td>
 		<tr th:each="flist : ${friendlist}">
 			<td th:text="${flist.frndSeq}"></td>
-			<td th:text="${flist.frndNm}"></td>
+			<td><a th:href="@{/detail(frndNm = ${flist.frndNm}, frndseq= ${flist.frndSeq})}" ><div th:text="${flist.frndNm}"></div></a></td>
 			<td></td>
 			<td th:text="${flist.createdDate}"></td>
 			<td th:text="${flist.modifiedDate}"></td>
-			<td><button type="button"  onClick="location.href='/update'">수정</button><button type="button"  th:onclick="'location.href=\'/delete?frndseq='+ @{${flist.frndSeq}} + '\''">삭제</button></td>
+			<td><button type="button"  th:onclick="'location.href=\'/update?frndseq='+ @{${flist.frndSeq}} + '\''">수정</button><button type="button"  th:onclick="'location.href=\'/delete?frndseq='+ @{${flist.frndSeq}} + '\''">삭제</button></td>
 		</tr>
 		<tr>
 			<td colspan="6"><button type="button"  onClick="location.href='/registration'">등록</button></td>

@@ -16,15 +16,15 @@ public interface PhoneRepository extends JpaRepository <Phone, Long> {
 	
 	List <Phone> findByTelType(String telType);
 	
-	List <Phone> findByTelNo1(int telNo1);
+	List <Phone> findByTelNo1(String telNo1);
 	
-	List <Phone> findByTelNo2(int telNo2);
+	List <Phone> findByTelNo2(String telNo2);
 	
-	List <Phone> findByTelNo3(int telNo3);
+	List <Phone> findByTelNo3(String telNo3);
 	
-	List <BaseEntity> findByCreatedDate(LocalDateTime createdDate);
+	List <Phone> findByCreatedDate(LocalDateTime createdDate);
 	
-	List <BaseEntity> findByModifiedDate(LocalDateTime modifiedDate);
+	List <Phone> findByModifiedDate(LocalDateTime modifiedDate);
 	
 	//List <Phone> deleteByFriend(Friend friend);
 

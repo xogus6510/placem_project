@@ -15,9 +15,9 @@ public interface FriendRepository extends JpaRepository <Friend, Long> {
 	
 	List <Friend> findByFrndNm(String frndNm);
 	
-	List <BaseEntity> findByCreatedDate(LocalDateTime createdDate);
+	List <Friend> findByCreatedDate(LocalDateTime createdDate);
 	
-	List <BaseEntity> findByModifiedDate(LocalDateTime modifiedDate);
+	List <Friend> findByModifiedDate(LocalDateTime modifiedDate);
 	
 	
 	
