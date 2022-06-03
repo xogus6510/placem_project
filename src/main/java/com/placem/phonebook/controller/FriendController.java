@@ -90,6 +90,7 @@ public class FriendController {
 	public ModelAndView detailupdate(@RequestParam("telSeq") long telSeq, @RequestParam("frndNm") String frndNm, @RequestParam("frndseq") Friend frndseq) {
 		System.out.println(telSeq + "=========");
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("telSeq", telSeq);
 		mv.addObject("frndNm", frndNm);
 		mv.addObject("frndseq", frndseq.getFrndSeq());
 		mv.setViewName("/detailupdate");
@@ -109,8 +110,15 @@ public class FriendController {
 
 	// 개별 전화 수정
 	@GetMapping("/detailupdatesave")
-	public String detailupdatesave() throws Exception {
-
+	public String detailupdatesave(@RequestParam("friend") Friend frndseq, @RequestParam("frndNm") String frndNm, @ModelAttribute Phone phone, @RequestParam("telSeq") long telSeq) throws Exception {
+		System.out.println(frndseq + frndNm + "++++++++++++++");
+		System.out.println(phone);
+		Phone phone2 = phonerepository.findById(telSeq).orElse(null);
+		phone2.setTelType(phone.getTelType());
+		phone2.setTelNo1(phone.getTelNo1());
+		phone2.setTelNo2(phone.getTelNo2());
+		phone2.setTelNo3(phone.getTelNo3());
+		phonerepository.save(phone2);
 		return "redirect:/list";
 	}
 
