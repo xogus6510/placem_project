@@ -18,8 +18,6 @@ th, td {
 </style>
 </head>
 <body>
-	<!--  <h1 th:text="${msg}"></h1>
-	<span th:text="${#lists.size(friendlist)}"></span>-->
 	<h1>지인 목록</h1>
 	<table>
 		<tr>
@@ -32,8 +30,8 @@ th, td {
 		</tr>
 		<td colspan="6" th:if="${#lists.size(friendlist)== 0}">지인 목록 결과가
 			없습니다.</td>
-		<tr th:each="flist : ${friendlist}">
-			<td th:text="${flist.frndSeq}"></td>
+		<tr th:each="flist, index : ${friendlist}">
+			<td th:text="${flist.frndSeq}-${flist.frndSeq}+${index.index}+1"></td>
 			<td><a
 				th:href="@{/detail(frndNm = ${flist.frndNm}, frndseq= ${flist.frndSeq})}"><div
 						th:text="${flist.frndNm}"></div></a></td>

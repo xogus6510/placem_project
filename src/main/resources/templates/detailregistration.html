@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="[http://www.thymeleaf.org](http://www.thymeleaf.org/)">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>홈페이지</title>
+<style>
+table {
+	margin: auto;
+	border: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 10px;
+	border: 1px solid #444444;
+}
+</style>
+</head>
+<body>
+	<h1>지인 등록</h1>
+	<form action="/detailadd" name="addform">
+		<table>
+			<tr>
+				<th>전화구분</th>
+				<th><select name="telType">
+						<option value="">선택</option>
+						<option value="집">집</option>
+						<option value="휴대폰">휴대폰</option>
+						<option value="회사">회사</option>
+						<option value="학교">학교</option>
+						<option value="FAX">FAX</option>
+				</select></th>
+			</tr>
+			<tr>
+				<th>전화번호</th>
+				<th><input type="text" name="telNo1" maxlength='4' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" > - <input
+					type="text" name="telNo2" maxlength='4' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> - <input type="text"
+					name="telNo3" maxlength='4' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></th>
+			</tr>
+			<tr>
+				<th colspan="2"><button type="submit">저장</button> 
+					<button type="button" th:onclick="'location.href=\'/detail?frndNm='+ @{${frndNm}} + '&frndseq='+ @{${frndseq}} +  '\''">취소</button></th>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

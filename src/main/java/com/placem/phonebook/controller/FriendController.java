@@ -49,10 +49,22 @@ public class FriendController {
 		model.addAttribute("msg", "Hello world");
 		return "registration";
 	}
+	
+	//개별 전화번호 등록
+		@GetMapping("/detailregistration")
+		public ModelAndView detailregistration(@RequestParam("frndseq") long frndseq, @RequestParam("frndNm") String frndNm) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("/detailregistration");
+			mv.addObject("frndNm", frndNm);
+			mv.addObject("frndseq", frndseq);
+			System.out.println(frndseq);
+			System.out.println(frndNm +"++++++++");
+			return mv;
+		}
 
 	//개별 전화번호 목록
 	@GetMapping("/detail")
-	public ModelAndView content(@RequestParam("frndNm") String frndNm, @RequestParam("frndseq") Friend frndseq) {
+	public ModelAndView detail(@RequestParam("frndNm") String frndNm, @RequestParam("frndseq") Friend frndseq) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/detail");
 		mv.addObject("frndNm", frndNm);
@@ -83,6 +95,7 @@ public class FriendController {
 		return "redirect:/list";
 	}
 
+	//전화번호 정보 등록 후 저장버튼 클릭
 	@GetMapping("/add")
 	public String addFriend(@ModelAttribute Friend friend, Phone phone) {
 		friendrepository.save(friend);
@@ -90,8 +103,17 @@ public class FriendController {
 		phonerepository.save(phone);
 		return "redirect:/list";
 	}
+	
+	//개별 전화번호 정보 등록 후 저장버튼 클릭
+		@GetMapping("/detailadd")
+		public String detailaddFriend(@ModelAttribute Friend friend, Phone phone) {
+			friendrepository.save(friend);
+			phone.setFriend(friend);
+			phonerepository.save(phone);
+			return "redirect:/list";
+		}
 
-	//
+	//지인 목록에서 데이터 삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam("frndseq") long frndseq) throws Exception {
 		Friend friend = friendrepository.findById(frndseq).orElse(null);
@@ -101,6 +123,7 @@ public class FriendController {
 		return "redirect:/list";
 	}
 
+	//전화 목록에서 데이터 삭제
 	@GetMapping("/detaildelete")
 	public String detaildelete(@RequestParam("telSeq") long telSeq, @RequestParam("frndNm") String frndNm,
 			@RequestParam("frndseq") long frndseq) throws Exception {

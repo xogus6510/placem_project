@@ -20,7 +20,6 @@ th, td {
 <body>
 	<h1>전화목록</h1>
 	<h1 th:text="${frndNm}"></h1>
-	<h1 th:text="${frndseq.frndSeq}"></h1>
 	<table>
 		<tr>
 			<th>순번</th>
@@ -32,8 +31,8 @@ th, td {
 		</tr>
 		<td colspan="6" th:if="${#lists.size(friend)== 0}">지인 목록 결과가
 			없습니다.</td>
-		<tr th:each="plist : ${friend}">
-			<td th:text="${plist.telSeq}"></td>
+		<tr th:each="plist,index : ${friend}">
+			<td th:text="${plist.telSeq}-${plist.telSeq}+${index.index}+1"></td>
 			<td th:text="${plist.telType}"></td>
 			<td><span th:text="${plist.telNo1}" />-<span
 				th:text="${plist.telNo2}" />-<span th:text="${plist.telNo3}" /></td>
@@ -43,7 +42,7 @@ th, td {
 				<button type="button" th:onclick="'location.href=\'/detaildelete?telSeq='+ @{${plist.telSeq}} + '&frndNm='+ @{${frndNm}} + '&frndseq='+ @{${frndseq.frndSeq}} + '\''">삭제</button></td>
 		</tr>
 		<tr>
-			<td colspan="6"><button type="button">등록</button>
+			<td colspan="6"><button type="button" th:onclick="'location.href=\'/detailregistration?frndseq='+ @{${frndseq.frndSeq}} + '&frndNm='+ @{${frndNm}} +'\''">등록</button>
 				<button type="button" onClick="location.href='/list'">목록</button></td>
 		</tr>
 	</table>
