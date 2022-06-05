@@ -19,6 +19,10 @@ th, td {
 .page{
 	padding : 0px 10px;
 }
+.search{
+	float: left;
+	padding : 0px 10px;
+}
 </style>
 </head>
 <body>
@@ -48,8 +52,18 @@ th, td {
 					th:onclick="'location.href=\'/delete?frndseq='+ @{${flist.frndSeq}} + '\''">삭제</button></td>
 		</tr>
 		<tr>
-			<td colspan="6"><button type="button"
-					onClick="location.href='/registration'">등록</button></td>
+			<td colspan="6">
+				<span class="search">검색 조건 : </span>
+				<form action="/search" name="test">
+				<select name="search"  class="search">
+						<option value="name">지인명</option>
+						<option value="num3">전화번호 뒷자리</option>
+				</select>
+				<input class="search" type="text" name="searchtext" /> 
+						<button type="submit" class="search"> 검색 </button> 
+				</form>
+				<button type="button" onClick="location.href='/registration'" class="search">등록</button>
+			</td>
 		</tr>
 		<tr >
 			<div th:text="${nowPage}"> </div>
