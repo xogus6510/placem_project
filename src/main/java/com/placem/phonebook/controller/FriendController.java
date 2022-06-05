@@ -8,11 +8,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,9 +40,12 @@ public class FriendController {
 
 	// 전화번호부 목록
 	@GetMapping("/list")
-	public String list(Model model) throws Exception {
+	public String list(Model model, @PageableDefault(page = 0, size = 3, sort = "frndSeq", direction = Sort.Direction.ASC) Pageable pageable ) throws Exception {
 		List<Friend> friend = friendrepository.findAll();
-		model.addAttribute("friendlist", friend);
+		Page<Friend> friend2 = friendrepository.findAll(pageable);
+		model.addAttribute("friendlist", friend2);
+		//model.addAttribute("list", friendrepository.findAll(pageable));
+		model.addAttribute("friendlist2", friend);
 		return "list";
 	}
 
