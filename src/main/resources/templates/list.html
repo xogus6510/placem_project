@@ -52,15 +52,19 @@ th, td {
 					onClick="location.href='/registration'">등록</button></td>
 		</tr>
 		<tr >
-			<div th:text="${nowPage}"></div>
+			<div th:text="${nowPage}"> </div>
 			<div th:text="${sizePage}"></div>
 			<div th:text="${nowPage * sizePage}"></div>
 		
 			<td colspan="6">
+			<a  th:if="${0 != nowPage}"  th:href="@{/list?(page = 0)}" class="page"  > <span> 처음  </span></a>
+			<a  th:if="${0 != nowPage}"  th:href="@{/list?(page = ${nowPage - 1})}" class="page"  > <span> 이전  </span></a>
 				<span th:each="page, index : ${#numbers.sequence(0, endPage)}">
 					<a  th:if="${page != nowPage}"  th:href="@{/list?(page = ${index.index })}" class="page" th:text ="${index.index + 1}" ></a>
 					 <strong class="page" th:if="${page == nowPage}" th:text="${page+1}" ></strong>
 				</span>
+				<a  th:if="${sizePage != nowPage}"  th:href="@{/list?(page = ${nowPage + 1})}" class="page"  > <span> 다음  </span></a>
+				<a  th:if="${sizePage != nowPage}"  th:href="@{/list?(page = ${sizePage})}" class="page"  > <span> 끝  </span></a>
 			</td>
 		</tr>
 	</table>
