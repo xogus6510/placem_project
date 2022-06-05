@@ -36,8 +36,4 @@ public class Friend extends BaseEntity {
 	  private List<Phone> phone = new ArrayList<Phone>();
 	
 	
-	
-	 // public void update(String frndNm) {
-	 //       this.frndNm = frndNm;
-	 //  }	
 }

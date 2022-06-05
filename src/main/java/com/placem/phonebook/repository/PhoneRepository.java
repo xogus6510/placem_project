@@ -13,21 +13,17 @@ import com.placem.phonebook.entity.Phone;
 public interface PhoneRepository extends JpaRepository <Phone, Long> {
 
 	List <Phone> findByTelSeq(long telSeq);	
-	
 	List <Phone> findByTelType(String telType);
-	
 	List <Phone> findByTelNo1(String telNo1);
-	
 	List <Phone> findByTelNo2(String telNo2);
-	
 	List <Phone> findByTelNo3(String telNo3);
-	
 	List <Phone> findByCreatedDate(LocalDateTime createdDate);
-	
 	List <Phone> findByModifiedDate(LocalDateTime modifiedDate);
-	
-	//List <Phone> deleteByFriend(Friend friend);
-
 	List<Phone> findAllByFriend(Friend friend);
 	List<Phone> findByFriend(Friend friend);
+	
+
+	
+	//@Query(value = "select count(*) from tb_phone m where m.frnd_seq = 55", nativeQuery = true)
+	//public List<Phone> test();
 }

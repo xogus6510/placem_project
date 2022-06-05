@@ -19,8 +19,8 @@ th, td {
 .page{
 	padding : 0px 10px;
 }
-.search{
-	float: left;
+tb.landscape{
+	display: flex;
 	padding : 0px 10px;
 }
 </style>
@@ -52,23 +52,22 @@ th, td {
 					th:onclick="'location.href=\'/delete?frndseq='+ @{${flist.frndSeq}} + '\''">삭제</button></td>
 		</tr>
 		<tr>
-			<td colspan="6">
-				<span class="search">검색 조건 : </span>
-				<form action="/search" name="test">
-				<select name="search"  class="search">
+			<td colspan="6" class="landscape">
+				<form action="/list" name="search">
+				<select name="search"  >
 						<option value="name">지인명</option>
 						<option value="num3">전화번호 뒷자리</option>
 				</select>
 				<input class="search" type="text" name="searchtext" /> 
 						<button type="submit" class="search"> 검색 </button> 
+						<button type="button" onClick="location.href='/registration'" >등록</button>
 				</form>
-				<button type="button" onClick="location.href='/registration'" class="search">등록</button>
 			</td>
 		</tr>
 		<tr >
-			<div th:text="${nowPage}"> </div>
+			<!-- <div th:text="${nowPage}"> </div>
 			<div th:text="${sizePage}"></div>
-			<div th:text="${nowPage * sizePage}"></div>
+			<div th:text="${nowPage * sizePage}"></div> -->
 		
 			<td colspan="6">
 			<a  th:if="${0 != nowPage}"  th:href="@{/list?(page = 0)}" class="page"  > <span> 처음  </span></a>
@@ -82,5 +81,8 @@ th, td {
 			</td>
 		</tr>
 	</table>
+	<div th:each="test : ${test}">
+		<div th:text="${test.friend}"></div>
+	</div>
 </body>
 </html>

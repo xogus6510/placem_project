@@ -21,6 +21,11 @@ public interface FriendRepository extends JpaRepository <Friend, Long> {
 	
 	Page<Friend> findAll(Pageable pageable);
 	
+	Page<Friend> findByFrndNmContaining(String frndNm, Pageable pageable);
 	
+	//@Query(value = "select * from tb_friend m", nativeQuery = true)
+	//List<Friend> findAllFrndSeq();
 	
+   //@Query( value = "select * from Friend m where m.frndNm LIKE %f%")
+     //List<Friend> findAllSearch();
 }
