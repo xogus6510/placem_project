@@ -35,7 +35,7 @@ th, td {
 		<td colspan="6" th:if="${#lists.size(friendlist)== 0}">지인 목록 결과가
 			없습니다.</td>
 		<tr th:each="flist, index : ${friendlist}">
-			<td th:text="${flist.frndSeq}-${flist.frndSeq}+${index.index}+1"></td>
+			<td th:text="(${flist.frndSeq}-${flist.frndSeq}+${index.index}+1 ) + ${nowPage * sizePage}"></td>
 			<td><a
 				th:href="@{/detail(frndNm = ${flist.frndNm}, frndseq= ${flist.frndSeq})}"><div
 						th:text="${flist.frndNm}"></div></a></td>
@@ -52,8 +52,16 @@ th, td {
 					onClick="location.href='/registration'">등록</button></td>
 		</tr>
 		<tr >
-			<td colspan="6"><span th:each="page, index : ${#numbers.sequence(0, endPage)}"><a
-				th:href="@{/list?(page = ${index.index })}"><span class="page" th:text ="${index.index + 1}" ></span></a></span></td>
+			<div th:text="${nowPage}"></div>
+			<div th:text="${sizePage}"></div>
+			<div th:text="${nowPage * sizePage}"></div>
+		
+			<td colspan="6">
+				<span th:each="page, index : ${#numbers.sequence(0, endPage)}">
+					<a  th:if="${page != nowPage}"  th:href="@{/list?(page = ${index.index })}" class="page" th:text ="${index.index + 1}" ></a>
+					 <strong class="page" th:if="${page == nowPage}" th:text="${page+1}" ></strong>
+				</span>
+			</td>
 		</tr>
 	</table>
 </body>

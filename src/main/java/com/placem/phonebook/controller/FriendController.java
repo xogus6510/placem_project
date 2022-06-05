@@ -40,11 +40,12 @@ public class FriendController {
 
 	// 전화번호부 목록
 	@GetMapping("/list")
-	public String list(Model model, @PageableDefault(page = 0, size = 2, sort = "frndSeq", direction = Sort.Direction.ASC) Pageable pageable ) throws Exception {
+	public String list(Model model, @PageableDefault(page = 0, size = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable ) throws Exception {
 		//List<Friend> friend = friendrepository.findAll();
 		Page<Friend> friend2 = friendrepository.findAll(pageable);
 		//System.out.println(pageable);
 		int nowPage = friend2.getPageable().getPageNumber();
+		int sizePage = friend2.getPageable().getPageSize();
 		 int startPage = Math.max(nowPage - 4, 1);
 		// int endPage = Math.min(nowPage + 3, friend2.getTotalPages());
 		 int endPage = friend2.getTotalPages() -1 ;
@@ -55,6 +56,7 @@ public class FriendController {
 		//model.addAttribute("friendlist2", friend);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("endPage", endPage);
+		model.addAttribute("sizePage", sizePage);
 		return "list";
 	}
 
