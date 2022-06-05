@@ -47,11 +47,9 @@ th, td {
 			<td colspan="6"><button type="button"
 					onClick="location.href='/registration'">등록</button></td>
 		</tr>
+		<tr >
+			<td colspan="6"><span th:each="page : ${#numbers.sequence(0, endPage)}">1</span></td>
+		</tr>
 	</table>
-
-	<tr th:each="list : ${list}">
-	<td th:text="${list.frndSeq}"></td>
-	</tr>
-
 </body>
 </html>
