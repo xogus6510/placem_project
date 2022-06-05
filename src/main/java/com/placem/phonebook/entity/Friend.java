@@ -32,7 +32,7 @@ public class Friend extends BaseEntity {
 	@Column (name = "frnd_nm")
 	private String frndNm;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="friend")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="friend")
 	  private List<Phone> phone = new ArrayList<Phone>();
 	
 	

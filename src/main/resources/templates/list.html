@@ -44,8 +44,8 @@ tb.landscape{
 				th:href="@{/detail(frndNm = ${flist.frndNm}, frndseq= ${flist.frndSeq})}"><div
 						th:text="${flist.frndNm}"></div></a></td>
 			<td></td>
-			<td th:text="${flist.createdDate}"></td>
-			<td th:text="${flist.modifiedDate}"></td>
+			<td th:text="${#temporals.format(flist.createdDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
+			<td th:text="${#temporals.format(flist.modifiedDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
 			<td><button type="button"
 					th:onclick="'location.href=\'/update?frndseq='+ @{${flist.frndSeq}} + '\''">수정</button>
 				<button type="button"

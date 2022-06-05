@@ -14,6 +14,7 @@ table {
 th, td {
 	padding: 10px;
 	border: 1px solid #444444;
+	text-align: center;
 }
 </style>
 </head>
@@ -36,8 +37,8 @@ th, td {
 			<td th:text="${plist.telType}"></td>
 			<td><span th:text="${plist.telNo1}" />-<span
 				th:text="${plist.telNo2}" />-<span th:text="${plist.telNo3}" /></td>
-			<td th:text="${plist.createdDate}"></td>
-			<td th:text="${plist.modifiedDate}"></td>
+				<td th:text="${#temporals.format(plist.createdDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
+			<td th:text="${#temporals.format(plist.modifiedDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
 			<td><button type="button" th:onclick="'location.href=\'/detailupdate?telSeq='+ @{${plist.telSeq}} + '&frndNm='+ @{${frndNm}} + '&frndseq='+ @{${frndseq.frndSeq}} + '\''">수정</button>
 				<button type="button" th:onclick="'location.href=\'/detaildelete?telSeq='+ @{${plist.telSeq}} + '&frndNm='+ @{${frndNm}} + '&frndseq='+ @{${frndseq.frndSeq}} + '\''">삭제</button></td>
 		</tr>
