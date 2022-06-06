@@ -44,9 +44,13 @@ public class FriendController {
 	public String list(Model model, @PageableDefault(page = 0, size = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable, 
 			 String searchtext, @RequestParam(required = false, defaultValue = "")String search) throws Exception {
 		//List<Friend> friend = friendrepository.findAll();
-		long test = 57;
-		long count = phonerepository.count(test);
-		System.out.println(count + "count==========");
+		//long test = 57;
+		//long count = phonerepository.count(test);
+		//System.out.println(count + "count==========");
+		Page<Friend> friend2 = friendrepository.findAll(pageable);
+		for (Friend f : friend2.toList()) {
+		    System.out.println(f.getFrndNm() + " : " + f.getPhone().size());
+		}
 		Page<Friend> friend = friendrepository.findAll(pageable);
 		/*if(search.equals("num3")) {
 			List<Phone> phone = phonerepository.findByTelNo3Equals(searchtext);
