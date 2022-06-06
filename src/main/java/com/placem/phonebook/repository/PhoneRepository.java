@@ -23,9 +23,7 @@ public interface PhoneRepository extends JpaRepository <Phone, Long> {
 	List <Phone> findByModifiedDate(LocalDateTime modifiedDate);
 	List<Phone> findAllByFriend(Friend friend);
 	List<Phone> findByFriend(Friend friend);
-	List<Phone> findByTelNo3Equals(String TelNo3);
-	
-
+	Page<Phone> findByTelNo3Equals(String TelNo3, Pageable pageable);
 	
 	@Query(value = "select count(*) from tb_phone m where m.frnd_seq = ?1", nativeQuery = true)
 	long count(long frndSeq);
