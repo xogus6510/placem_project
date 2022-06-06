@@ -43,15 +43,17 @@ public class FriendController {
 	@GetMapping("/list")
 	public String list(Model model, @PageableDefault(page = 0, size = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable, 
 			 String searchtext, @RequestParam(required = false, defaultValue = "")String search) throws Exception {
-		//List<Friend> friend = friendrepository.findAll();
-		//long test = 57;
-		//long count = phonerepository.count(test);
-		//System.out.println(count + "count==========");
-		Page<Friend> friend2 = friendrepository.findAll(pageable);
+		Page<Friend> friend = friendrepository.findAll(pageable);
+		//카운트 찾아오기 TEST
+		/*long test = 57;
+		long count = phonerepository.count(test);
+		System.out.println(count + "count==========");*/
+		//Phone size TEST
+		/*Page<Friend> friend2 = friendrepository.findAll(pageable);
 		for (Friend f : friend2.toList()) {
 		    System.out.println(f.getFrndNm() + " : " + f.getPhone().size());
-		}
-		Page<Friend> friend = friendrepository.findAll(pageable);
+		}*/
+		
 		/*if(search.equals("num3")) {
 			List<Phone> phone = phonerepository.findByTelNo3Equals(searchtext);
 			int size = phone.size();
@@ -90,14 +92,14 @@ public class FriendController {
 		}
 		int nowPage = friend.getPageable().getPageNumber();
 		int sizePage = friend.getPageable().getPageSize();
-		 int startPage = Math.max(nowPage - 4, 1);
 		 int endPage = friend.getTotalPages() -1 ;
-		 int total = friend.getTotalPages();
-		System.out.println(nowPage + "=now" + startPage + "=start" + endPage +"total =" + total);
+		 int totalPage = friend.getTotalPages();
+		System.out.println(nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage +"=endPage,  " + totalPage +"=total");
 		model.addAttribute("friendlist", friend);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("sizePage", sizePage);
+		model.addAttribute("totalPage", totalPage);
 		return "list";
 	}
 
