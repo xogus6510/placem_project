@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Formula;
+import org.springframework.data.jpa.repository.Query;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +37,5 @@ public class Friend extends BaseEntity {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="friend")
 	  private List<Phone> phone = new ArrayList<Phone>();
-	
 	
 }

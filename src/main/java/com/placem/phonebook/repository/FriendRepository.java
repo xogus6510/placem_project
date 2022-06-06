@@ -11,18 +11,13 @@ import com.placem.phonebook.entity.Friend;
 
 public interface FriendRepository extends JpaRepository <Friend, Long> {
 
-	List <Friend> findByFrndSeq(long frndSeq);	
-	
+	Page <Friend> findByFrndSeq(long frndSeq, Pageable pageable);	
 	List <Friend> findByFrndNm(String frndNm);
-	
 	List <Friend> findByCreatedDate(LocalDateTime createdDate);
-	
 	List <Friend> findByModifiedDate(LocalDateTime modifiedDate);
-	
 	Page<Friend> findAll(Pageable pageable);
-	
 	Page<Friend> findByFrndNmContaining(String frndNm, Pageable pageable);
-	
+	Page<Friend> findByFrndNmEquals(String frndNm, Pageable pageable);
 	//@Query(value = "select * from tb_friend m", nativeQuery = true)
 	//List<Friend> findAllFrndSeq();
 	

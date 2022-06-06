@@ -3,6 +3,8 @@ package com.placem.phonebook.repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -21,9 +23,10 @@ public interface PhoneRepository extends JpaRepository <Phone, Long> {
 	List <Phone> findByModifiedDate(LocalDateTime modifiedDate);
 	List<Phone> findAllByFriend(Friend friend);
 	List<Phone> findByFriend(Friend friend);
+	List<Phone> findByTelNo3Equals(String TelNo3);
 	
 
 	
-	//@Query(value = "select count(*) from tb_phone m where m.frnd_seq = 55", nativeQuery = true)
-	//public List<Phone> test();
+	@Query(value = "select count(*) from tb_phone m where m.frnd_seq = ?1", nativeQuery = true)
+	long count(long frndSeq);
 }
