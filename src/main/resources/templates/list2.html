@@ -26,9 +26,9 @@ tb.landscape{
 </style>
 </head>
 <body>
-<h1>TEST</h1>
-<table>
-<tr>
+	<h1>지인 목록</h1>
+	<table>
+		<tr>
 			<th>순번</th>
 			<th>지인이름</th>
 			<th>전화 수</th>
@@ -36,8 +36,23 @@ tb.landscape{
 			<th>수정일시</th>
 			<th>업무</th>
 		</tr>
-		<div th:text="${num3}"></div>
-	<tr th:each="flist, index : ${friendlist}">
+		<td colspan="6" th:if="${#lists.size(friendlist)== 0}">지인 목록 결과가
+			없습니다.</td>
+		<tr th:each="flist, index : ${friendlist}" th:if= "${num3 == null}">
+			<td th:text="(${flist.frndSeq}-${flist.frndSeq}+${index.index}+1 ) + ${nowPage * sizePage}"></td>
+			<td><a
+				th:href="@{/detail(frndNm = ${flist.frndNm}, frndseq= ${flist.frndSeq})}"><div
+						th:text="${flist.frndNm}"></div></a></td>
+			<td  th:text="${flist.phone.size}"></td>
+			<td th:text="${#temporals.format(flist.createdDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
+			<td th:text="${#temporals.format(flist.modifiedDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
+			<td><button type="button"
+					th:onclick="'location.href=\'/update?frndseq='+ @{${flist.frndSeq}} + '\''">수정</button>
+				<button type="button"
+					th:onclick="'location.href=\'/delete?frndseq='+ @{${flist.frndSeq}} + '\''">삭제</button></td>
+		</tr>
+		<!-- ------------------전화번호로 검색------------------------ -->
+		<tr th:each="flist, index : ${friendlist}" th:if= "${num3 != null}">
 			<td th:text="(${flist.friend.frndSeq}-${flist.friend.frndSeq}+${index.index}+1 ) + ${nowPage * sizePage}"></td>
 			<td><a
 				th:href="@{/detail(frndNm = ${flist.friend.frndNm}, frndseq= ${flist.friend.frndSeq})}"><div
@@ -50,6 +65,37 @@ tb.landscape{
 				<button type="button"
 					th:onclick="'location.href=\'/delete?frndseq='+ @{${flist.friend.frndSeq}} + '\''">삭제</button></td>
 		</tr>
-		</table>
+		<!-- ------------------------------------------ -->
+		<tr>
+			<td colspan="6" class="landscape">
+				<form action="/list" name="search">
+				<select name="search"  >
+						<option value="name">지인명</option>
+						<option value="num3">전화번호 뒷자리</option>
+				</select>
+				<input class="search" type="text" name="searchtext" /> 
+						<button type="submit" class="search"> 검색 </button> 
+						<button type="button" onClick="location.href='/registration'" >등록</button>
+				</form>
+			</td>
+		</tr>
+		<tr >
+			<!-- <div th:text="${nowPage}"> </div>
+			<div th:text="${sizePage}"></div>
+			<div th:text="${nowPage * sizePage}"></div> -->
+		
+			<td colspan="6">
+			<a  th:if="${0 != nowPage}"  th:href="@{/list?(page = 0)}" class="page"  > <span> 처음  </span></a>
+			<a  th:if="${0 != nowPage}"  th:href="@{/list?(page = ${nowPage - 1})}" class="page"  > <span> 이전  </span></a>
+				<span th:each="page, index : ${#numbers.sequence(0, endPage)}">
+					<a  th:if="${page != nowPage}"  th:href="@{/list?(page = ${index.index })}" class="page" th:text ="${index.index + 1}" ></a>
+					 <strong class="page" th:if="${page == nowPage}" th:text="${page+1}" ></strong>
+				</span>
+				<a  th:if="${endPage != nowPage}"  th:href="@{/list?(page = ${nowPage + 1})}" class="page"  > <span> 다음  </span></a>
+				<a  th:if="${endPage != nowPage}"  th:href="@{/list?(page = ${totalPage-1})}" class="page"  > <span> 끝  </span></a>
+			</td>
+		</tr>
+	</table>
+	
 </body>
 </html>

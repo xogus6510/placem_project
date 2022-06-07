@@ -41,50 +41,60 @@ public class FriendController {
 
 	// 전화번호부 목록
 	@GetMapping("/list")
-	public String list(Model model, @PageableDefault(page = 0, size = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable, 
-			String searchtext, @RequestParam(required = false, defaultValue = "")String search) throws Exception {
+	public String list(Model model,
+			@PageableDefault(page = 0, size = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable,
+			String searchtext, @RequestParam(required = false, defaultValue = "") String search) throws Exception {
 		Page<Friend> friend = friendrepository.findAll(pageable);
-		//카운트 찾아오기 TEST
-		/*long test = 57;
-		long count = phonerepository.count(test);
-		System.out.println(count + "count==========");*/
-		//Phone size TEST
-		/*Page<Friend> friend2 = friendrepository.findAll(pageable);
-		for (Friend f : friend2.toList()) {
-		    System.out.println(f.getFrndNm() + " : " + f.getPhone().size());
-		}*/
-		
-		if(search.equals("num3")) {
+		// 카운트 찾아오기 TEST
+		/*
+		 * long test = 57; long count = phonerepository.count(test);
+		 * System.out.println(count + "count==========");
+		 */
+		// Phone size TEST
+		/*
+		 * Page<Friend> friend2 = friendrepository.findAll(pageable); for (Friend f :
+		 * friend2.toList()) { System.out.println(f.getFrndNm() + " : " +
+		 * f.getPhone().size()); }
+		 */
+
+		if (search.equals("num3")) {
 			Page<Phone> phone = phonerepository.findByTelNo3Equals(searchtext, pageable);
-			//int size = phone.size();
+			// int size = phone.size();
 			Page<Friend> friendnum;
-			//friendnum = friendrepository.findByFrndSeq(phone.get(0).getFriend().getFrndSeq(), pageable);
-			//for( int i = 0; i < size; i++ ) {
-				//System.out.println(phone.get(i).getFriend().getFrndSeq() + "===같은 번호(FrndSeq)");
-				//friendnum = friendrepository.findByFrndSeq(phone.get(i).getFriend().getFrndSeq(), pageable);
-			//}
-			
+			// friendnum =
+			// friendrepository.findByFrndSeq(phone.get(0).getFriend().getFrndSeq(),
+			// pageable);
+			// for( int i = 0; i < size; i++ ) {
+			// System.out.println(phone.get(i).getFriend().getFrndSeq() + "===같은
+			// 번호(FrndSeq)");
+			// friendnum =
+			// friendrepository.findByFrndSeq(phone.get(i).getFriend().getFrndSeq(),
+			// pageable);
+			// }
+
 			int nowPage = phone.getPageable().getPageNumber();
 			int sizePage = phone.getPageable().getPageSize();
-			 int endPage = phone.getTotalPages() -1 ;
-			 int totalPage = friend.getTotalPages();
-			 System.out.println(nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage +"=endPage,  " + totalPage +"=total");
-			 model.addAttribute("friendlist", phone);
+			int endPage = phone.getTotalPages() - 1;
+			int totalPage = friend.getTotalPages();
+			System.out.println(
+					nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage + "=endPage,  " + totalPage + "=totalPage");
+			model.addAttribute("friendlist", phone);
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("sizePage", sizePage);
 			model.addAttribute("num3", "num3");
 			return "list";
 		}
-		//지인이름 검색
-		if(search.equals("name")) {
-			Page<Friend> friendname = friendrepository.findByFrndNmContaining(searchtext, pageable);	
+		// 지인이름 검색
+		if (search.equals("name")) {
+			Page<Friend> friendname = friendrepository.findByFrndNmContaining(searchtext, pageable);
 			int nowPage = friendname.getPageable().getPageNumber();
 			int sizePage = friendname.getPageable().getPageSize();
-			 int endPage = friendname.getTotalPages() -1 ;
-			 int totalPage = friend.getTotalPages();
-			 System.out.println(nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage +"=endPage,  " + totalPage +"=total");
-			 model.addAttribute("friendlist", friendname);
+			int endPage = friendname.getTotalPages() - 1;
+			int totalPage = friend.getTotalPages();
+			System.out.println(
+					nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage + "=endPage,  " + totalPage + "=total");
+			model.addAttribute("friendlist", friendname);
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("sizePage", sizePage);
@@ -92,9 +102,10 @@ public class FriendController {
 		}
 		int nowPage = friend.getPageable().getPageNumber();
 		int sizePage = friend.getPageable().getPageSize();
-		 int endPage = friend.getTotalPages() -1 ;
-		 int totalPage = friend.getTotalPages();
-		System.out.println(nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage +"=endPage,  " + totalPage +"=total");
+		int endPage = friend.getTotalPages() - 1;
+		int totalPage = friend.getTotalPages();
+		System.out.println(
+				nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage + "=endPage,  " + totalPage + "=total");
 		model.addAttribute("friendlist", friend);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("endPage", endPage);
@@ -147,7 +158,8 @@ public class FriendController {
 
 	// 개별 전화 수정 페이지
 	@GetMapping("/detailupdate")
-	public ModelAndView detailupdate(@RequestParam("telSeq") long telSeq, @RequestParam("frndNm") String frndNm, @RequestParam("frndseq") Friend frndseq) {
+	public ModelAndView detailupdate(@RequestParam("telSeq") long telSeq, @RequestParam("frndNm") String frndNm,
+			@RequestParam("frndseq") Friend frndseq) {
 		System.out.println(telSeq + "=========");
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("telSeq", telSeq);
@@ -170,7 +182,8 @@ public class FriendController {
 
 	// 개별 전화 수정
 	@GetMapping("/detailupdatesave")
-	public String detailupdatesave(@RequestParam("friend") Friend frndseq, @RequestParam("frndNm") String frndNm, @ModelAttribute Phone phone, @RequestParam("telSeq") long telSeq) throws Exception {
+	public String detailupdatesave(@RequestParam("friend") Friend frndseq, @RequestParam("frndNm") String frndNm,
+			@ModelAttribute Phone phone, @RequestParam("telSeq") long telSeq) throws Exception {
 		System.out.println(frndseq + frndNm + "++++++++++++++");
 		System.out.println(phone);
 		Phone phone2 = phonerepository.findById(telSeq).orElse(null);
