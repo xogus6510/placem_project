@@ -56,7 +56,9 @@ public class FriendController {
 		 * friend2.toList()) { System.out.println(f.getFrndNm() + " : " +
 		 * f.getPhone().size()); }
 		 */
-
+		List<Friend> test = friendrepository.count("6510");
+		model.addAttribute("test", test);
+		//System.out.println(test +"+++++++++++++++++++++");
 		if (search.equals("num3")) {
 			Page<Phone> phone = phonerepository.findByTelNo3Equals(searchtext, pageable);
 			//Page<Friend> friendnum;

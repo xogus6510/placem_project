@@ -28,5 +28,5 @@ public interface PhoneRepository extends JpaRepository <Phone, Long> {
 	@Query(value = "select count(*) from tb_phone m where m.frnd_seq = ?1", nativeQuery = true)
 	long count(long frndSeq);
 	
-	//SELECT tb_friend.frnd_seq, tb_friend.frnd_nm, tb_friend.created_date, tb_friend.modified_date, count(tb_phone.frnd_seq) as count FROM phonebookdb.tb_phone join tb_friend on tb_friend.frnd_seq = tb_phone.frnd_seq group by tb_phone.frnd_seq;
+	
 }
