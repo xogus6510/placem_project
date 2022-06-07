@@ -58,7 +58,7 @@ tb.landscape{
 			<td><a
 				th:href="@{/detail(frndNm = ${flist.friend.frndNm}, frndseq= ${flist.friend.frndSeq})}"><div
 						th:text="${flist.friend.frndNm}"></div></a></td>
-			<td ></td>
+			<td  th:text="${#lists.size(flist)}"></td>
 			<td th:text="${#temporals.format(flist.createdDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
 			<td th:text="${#temporals.format(flist.modifiedDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
 			<td><button type="button"

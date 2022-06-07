@@ -59,8 +59,8 @@ public class FriendController {
 
 		if (search.equals("num3")) {
 			Page<Phone> phone = phonerepository.findByTelNo3Equals(searchtext, pageable);
+			//Page<Friend> friendnum;
 			// int size = phone.size();
-			Page<Friend> friendnum;
 			// friendnum =
 			// friendrepository.findByFrndSeq(phone.get(0).getFriend().getFrndSeq(),
 			// pageable);
@@ -117,7 +117,6 @@ public class FriendController {
 	// 지인 전화번호 등록
 	@GetMapping("/registration")
 	public String registration(Model model) throws Exception {
-		model.addAttribute("msg", "Hello world");
 		return "registration";
 	}
 
@@ -198,9 +197,13 @@ public class FriendController {
 	// 전화번호 정보 등록 후 저장버튼 클릭
 	@GetMapping("/add")
 	public String addFriend(@ModelAttribute Friend friend, Phone phone) {
+		System.out.println(friend + "= friend,  " + phone.getTelNo1().length() + "= phone");
 		friendrepository.save(friend);
 		phone.setFriend(friend);
-		phonerepository.save(phone);
+		if(phone.getTelNo1().length() != 0 && phone.getTelNo2().length() != 0 && phone.getTelNo3().length() != 0) {
+			
+			phonerepository.save(phone);
+		}
 		return "redirect:/list";
 	}
 
