@@ -37,7 +37,7 @@ tb.landscape{
 			<th>업무</th>
 		</tr>
 		<!-- <div th:text = "${#lists.size(friendlist)}"></div> -->
-		<td colspan="6" th:if="${totalPage == 0} ">지인 목록 결과가
+		<td colspan="6" th:if="${endPage == -1} ">지인 목록 결과가
 			없습니다.</td>
 		<tr th:each="flist, index : ${friendlist}" th:if= "${num3 == null}">
 			<td th:text="(${flist.frndSeq}-${flist.frndSeq}+${index.index}+1 ) + ${nowPage * sizePage}"></td>
