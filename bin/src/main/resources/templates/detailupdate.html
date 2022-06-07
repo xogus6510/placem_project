@@ -18,13 +18,12 @@ th, td {
 </style>
 </head>
 <body>
-	<h1>지인 등록</h1>
-	<form action="/add" name="addform">
+	<h1>전화 수정</h1>
+	<form action="/detailupdatesave" name="addform">
+		<input type="hidden" name="friend" th:value="${frndseq}"/>
+		<input type="hidden" name="frndNm" th:value="${frndNm}"/>
+		<input type="hidden" name="telSeq" th:value="${telSeq}"/>
 		<table>
-			<tr>
-				<th>지인이름</th>
-				<th><input type="text" name="frndNm"></th>
-			</tr>
 			<tr>
 				<th>전화구분</th>
 				<th><select name="telType">
@@ -43,9 +42,8 @@ th, td {
 					name="telNo3" maxlength='4' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></th>
 			</tr>
 			<tr>
-				<th colspan="2"><button type="submit"
-						onClick="location.href='/save'">저장</button> 
-					<button type="button" onClick="location.href='/list'">취소</button></th>
+				<th colspan="2"><button type="submit">저장</button> 
+					<button type="button" th:onclick="'location.href=\'/detail?frndNm='+ @{${frndNm}} + '&frndseq='+ @{${frndseq}} +  '\''">취소</button></th>
 			</tr>
 		</table>
 	</form>

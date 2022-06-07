@@ -36,7 +36,6 @@ tb.landscape{
 			<th>수정일시</th>
 			<th>업무</th>
 		</tr>
-		<div th:text="${num3}"></div>
 	<tr th:each="flist, index : ${friendlist}">
 			<td th:text="(${flist.friend.frndSeq}-${flist.friend.frndSeq}+${index.index}+1 ) + ${nowPage * sizePage}"></td>
 			<td><a

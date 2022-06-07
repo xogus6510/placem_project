@@ -38,7 +38,7 @@ tb.landscape{
 		</tr>
 		<td colspan="6" th:if="${#lists.size(friendlist)== 0}">지인 목록 결과가
 			없습니다.</td>
-		<tr th:each="flist, index : ${friendlist}">
+		<tr th:each="flist, index : ${friendlist}" th:if= "${num3 == null}">
 			<td th:text="(${flist.frndSeq}-${flist.frndSeq}+${index.index}+1 ) + ${nowPage * sizePage}"></td>
 			<td><a
 				th:href="@{/detail(frndNm = ${flist.frndNm}, frndseq= ${flist.frndSeq})}"><div
@@ -51,6 +51,21 @@ tb.landscape{
 				<button type="button"
 					th:onclick="'location.href=\'/delete?frndseq='+ @{${flist.frndSeq}} + '\''">삭제</button></td>
 		</tr>
+		<!-- ------------------------------------------ -->
+		<tr th:each="flist, index : ${friendlist}" th:if= "${num3 != null}">
+			<td th:text="(${flist.friend.frndSeq}-${flist.friend.frndSeq}+${index.index}+1 ) + ${nowPage * sizePage}"></td>
+			<td><a
+				th:href="@{/detail(frndNm = ${flist.friend.frndNm}, frndseq= ${flist.friend.frndSeq})}"><div
+						th:text="${flist.friend.frndNm}"></div></a></td>
+			<td ></td>
+			<td th:text="${#temporals.format(flist.createdDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
+			<td th:text="${#temporals.format(flist.modifiedDate, 'yyyy.MM.dd HH:mm:ss')}"></td>
+			<td><button type="button"
+					th:onclick="'location.href=\'/update?frndseq='+ @{${flist.friend.frndSeq}} + '\''">수정</button>
+				<button type="button"
+					th:onclick="'location.href=\'/delete?frndseq='+ @{${flist.friend.frndSeq}} + '\''">삭제</button></td>
+		</tr>
+		<!-- ------------------------------------------ -->
 		<tr>
 			<td colspan="6" class="landscape">
 				<form action="/list" name="search">

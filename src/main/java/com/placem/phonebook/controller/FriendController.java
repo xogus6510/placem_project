@@ -73,7 +73,8 @@ public class FriendController {
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("sizePage", sizePage);
-			return "list2";
+			model.addAttribute("num3", "num3");
+			return "list";
 		}
 		//지인이름 검색
 		if(search.equals("name")) {
