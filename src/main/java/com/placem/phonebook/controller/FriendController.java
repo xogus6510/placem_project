@@ -43,7 +43,7 @@ public class FriendController {
 	@GetMapping("/list")
 	public String list(Model model,
 			@PageableDefault(page = 0, size = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable,
-			String searchtext, @RequestParam(required = false, defaultValue = "") String search) throws Exception {
+			@RequestParam(required = false, defaultValue = "")String searchtext, @RequestParam(required = false, defaultValue = "") String search) throws Exception {
 		Page<Friend> friend = friendrepository.findAll(pageable);
 		// 카운트 찾아오기 TEST
 		/*
@@ -98,7 +98,8 @@ public class FriendController {
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("sizePage", sizePage);
-			return "list";
+			model.addAttribute("searchtext", searchtext);
+			return "listname";
 		}
 		int nowPage = friend.getPageable().getPageNumber();
 		int sizePage = friend.getPageable().getPageSize();
