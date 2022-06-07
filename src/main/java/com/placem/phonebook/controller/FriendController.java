@@ -93,7 +93,7 @@ public class FriendController {
 			int endPage = friendname.getTotalPages() - 1;
 			int totalPage = friend.getTotalPages();
 			System.out.println(
-					nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage + "=endPage,  " + totalPage + "=total");
+					nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage + "=endPage,  " + totalPage + "=totalPage");
 			model.addAttribute("friendlist", friendname);
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("endPage", endPage);
@@ -105,7 +105,7 @@ public class FriendController {
 		int endPage = friend.getTotalPages() - 1;
 		int totalPage = friend.getTotalPages();
 		System.out.println(
-				nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage + "=endPage,  " + totalPage + "=total");
+				nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage + "=endPage,  " + totalPage + "=totalPage");
 		model.addAttribute("friendlist", friend);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("endPage", endPage);

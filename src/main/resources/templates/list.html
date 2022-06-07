@@ -36,8 +36,8 @@ tb.landscape{
 			<th>수정일시</th>
 			<th>업무</th>
 		</tr>
-		<div th:text = "${#lists.size(friendlist)}"></div>
-		<td colspan="6" th:if="${totalPage == 0}">지인 목록 결과가
+		<!-- <div th:text = "${#lists.size(friendlist)}"></div> -->
+		<td colspan="6" th:if="${totalPage == 0} ">지인 목록 결과가
 			없습니다.</td>
 		<tr th:each="flist, index : ${friendlist}" th:if= "${num3 == null}">
 			<td th:text="(${flist.frndSeq}-${flist.frndSeq}+${index.index}+1 ) + ${nowPage * sizePage}"></td>
@@ -85,7 +85,7 @@ tb.landscape{
 			<div th:text="${sizePage}"></div>
 			<div th:text="${nowPage * sizePage}"></div> -->
 		
-			<td colspan="6" th:if="${totalPage != 0 }">
+			<td colspan="6" th:if="${totalPage != 0 } and ${endPage != -1}">
 			<a  th:if="${0 != nowPage}"  th:href="@{/list?(page = 0)}" class="page"  > <span> 처음  </span></a>
 			<a  th:if="${0 != nowPage}"  th:href="@{/list?(page = ${nowPage - 1})}" class="page"  > <span> 이전  </span></a>
 				<span th:each="page, index : ${#numbers.sequence(0, endPage)}">
