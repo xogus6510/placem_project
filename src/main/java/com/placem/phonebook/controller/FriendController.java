@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +25,7 @@ import com.placem.phonebook.entity.Friend;
 import com.placem.phonebook.entity.Phone;
 import com.placem.phonebook.repository.FriendRepository;
 import com.placem.phonebook.repository.PhoneRepository;
+import com.placem.phonebook.service.FriendService;
 
 @Controller
 public class FriendController {
@@ -38,6 +40,9 @@ public class FriendController {
 	EntityManagerFactory emf;
 	@PersistenceContext
 	EntityManager em;
+	
+	@Autowired
+	FriendService service;
 
 	// 전화번호부 목록
 	@GetMapping("/list")
@@ -45,35 +50,16 @@ public class FriendController {
 			@PageableDefault(page = 0, size = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable,
 			@RequestParam(required = false, defaultValue = "")String searchtext, @RequestParam(required = false, defaultValue = "") String search) throws Exception {
 		Page<Friend> friend = friendrepository.findAll(pageable);
-		// 카운트 찾아오기 TEST
-		/*
-		 * long test = 57; long count = phonerepository.count(test);
-		 * System.out.println(count + "count==========");
-		 */
-		// Phone size TEST
-		/*
-		 * Page<Friend> friend2 = friendrepository.findAll(pageable); for (Friend f :
-		 * friend2.toList()) { System.out.println(f.getFrndNm() + " : " +
-		 * f.getPhone().size()); }
-		 */
-		List<Friend> test = friendrepository.count("6510");
-		model.addAttribute("test", test);
-		//System.out.println(test +"+++++++++++++++++++++");
+		
+		
+		//TypedQuery<Friend> query = em.createQuery("select r from Friend r",Friend.class);
+		//List<Friend> test = query.getResultList();
+		//System.out.println(test +"===jpql");
+		//System.out.println(test.get(0).getFrndNm());
+		String test2 = service.test();
+		
 		if (search.equals("num3")) {
 			Page<Phone> phone = phonerepository.findByTelNo3Equals(searchtext, pageable);
-			//Page<Friend> friendnum;
-			// int size = phone.size();
-			// friendnum =
-			// friendrepository.findByFrndSeq(phone.get(0).getFriend().getFrndSeq(),
-			// pageable);
-			// for( int i = 0; i < size; i++ ) {
-			// System.out.println(phone.get(i).getFriend().getFrndSeq() + "===같은
-			// 번호(FrndSeq)");
-			// friendnum =
-			// friendrepository.findByFrndSeq(phone.get(i).getFriend().getFrndSeq(),
-			// pageable);
-			// }
-
 			int nowPage = phone.getPageable().getPageNumber();
 			int sizePage = phone.getPageable().getPageSize();
 			int endPage = phone.getTotalPages() - 1;
@@ -85,6 +71,7 @@ public class FriendController {
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("sizePage", sizePage);
 			model.addAttribute("num3", "num3");
+			//model.addAttribute("test", test);
 			return "list";
 		}
 		// 지인이름 검색
@@ -204,7 +191,6 @@ public class FriendController {
 		friendrepository.save(friend);
 		phone.setFriend(friend);
 		if(phone.getTelNo1().length() != 0 && phone.getTelNo2().length() != 0 && phone.getTelNo3().length() != 0) {
-			
 			phonerepository.save(phone);
 		}
 		return "redirect:/list";
