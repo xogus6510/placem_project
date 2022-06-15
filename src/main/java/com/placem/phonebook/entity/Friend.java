@@ -1,5 +1,6 @@
 package com.placem.phonebook.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Formula;
 import org.springframework.data.jpa.repository.Query;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +28,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_friend")
 public class Friend extends BaseEntity {
 		
@@ -37,5 +41,13 @@ public class Friend extends BaseEntity {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="friend")
 	  private List<Phone> phone = new ArrayList<Phone>();
+	
+	@Builder
+	public Friend(long frndSeq, String frndNm, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+		this.frndSeq = frndSeq;
+		this.frndNm = frndNm;
+		this.createdDate = createdDate;
+		this.modifiedDate = modifiedDate;
+	}
 	
 }

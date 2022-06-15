@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.placem.phonebook.dto.PhonebookDTO;
 import com.placem.phonebook.entity.Friend;
 import com.placem.phonebook.entity.Phone;
 import com.placem.phonebook.repository.FriendRepository;
@@ -56,7 +57,8 @@ public class FriendController {
 		//List<Friend> test = query.getResultList();
 		//System.out.println(test +"===jpql");
 		//System.out.println(test.get(0).getFrndNm());
-		String test2 = service.test();
+		service.test();
+		//System.out.println(test +"dto로 컨트롤러에 보냄");
 		
 		if (search.equals("num3")) {
 			Page<Phone> phone = phonerepository.findByTelNo3Equals(searchtext, pageable);

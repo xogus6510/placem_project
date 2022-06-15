@@ -24,10 +24,10 @@ public class BaseEntity {
 
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	@CreatedDate
-	private LocalDateTime createdDate;
+	public LocalDateTime createdDate;
 
 	@LastModifiedDate
-	private LocalDateTime modifiedDate;
+	public LocalDateTime modifiedDate;
 
 	// @PrePersist
 	// public void onPrePersist(){

@@ -1,5 +1,6 @@
 package com.placem.phonebook.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,19 +9,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.placem.phonebook.dto.PhonebookDTO;
 import com.placem.phonebook.entity.Friend;
-import com.placem.phonebook.repository.FriendRepository;
-import com.placem.phonebook.repository.PhoneRepository;
 
 @Service
 public class FriendService {
-	@Autowired
-	private FriendRepository friendrepository;
-	@Autowired
-	private PhoneRepository phonerepository;
 
 	@PersistenceUnit
 	EntityManagerFactory emf;
@@ -29,11 +25,23 @@ public class FriendService {
 	
 	
 	public String test() {
+		
+		ModelMapper modelMapper = new ModelMapper();
+		
+		
 		TypedQuery<Friend> query = em.createQuery("select r from Friend r",Friend.class);
 		List<Friend> test = query.getResultList();
-		System.out.println(test +"===jpql");
-		System.out.println(test.get(0).getFrndNm());
-		return "완료";
+		//PhonebookDTO frienddto = modelMapper.map(query, PhonebookDTO.class);
+	    List<PhonebookDTO> resultList = Arrays.asList(modelMapper.map(test,PhonebookDTO[].class));
+	    for(PhonebookDTO a : resultList) {
+	    	System.out.println(a);
+	    }
+		//System.out.println(frienddto + "dto");
+		//System.out.println(test +"===jpql");
+		//System.out.println(test.get(0).getFrndNm());
+		
+		
+		return "test";
 	}
 	
 	
