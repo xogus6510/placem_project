@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.placem.phonebook.dto.PhonebookDTO;
+import com.placem.phonebook.dto.FriendDTO;
 import com.placem.phonebook.entity.Friend;
 import com.placem.phonebook.entity.Phone;
 import com.placem.phonebook.repository.FriendRepository;
@@ -51,29 +51,18 @@ public class FriendController {
 			@PageableDefault(page = 0, size = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable,
 			@RequestParam(required = false, defaultValue = "")String searchtext, @RequestParam(required = false, defaultValue = "") String search) throws Exception {
 		Page<Friend> friend = friendrepository.findAll(pageable);
-		
-		
-		//TypedQuery<Friend> query = em.createQuery("select r from Friend r",Friend.class);
-		//List<Friend> test = query.getResultList();
-		//System.out.println(test +"===jpql");
-		//System.out.println(test.get(0).getFrndNm());
 		service.test();
-		//System.out.println(test +"dto로 컨트롤러에 보냄");
-		
 		if (search.equals("num3")) {
 			Page<Phone> phone = phonerepository.findByTelNo3Equals(searchtext, pageable);
 			int nowPage = phone.getPageable().getPageNumber();
 			int sizePage = phone.getPageable().getPageSize();
 			int endPage = phone.getTotalPages() - 1;
 			int totalPage = friend.getTotalPages();
-			System.out.println(
-					nowPage + "=nowPage, " + sizePage + "=sizePage, " + endPage + "=endPage,  " + totalPage + "=totalPage");
 			model.addAttribute("friendlist", phone);
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("sizePage", sizePage);
 			model.addAttribute("num3", "num3");
-			//model.addAttribute("test", test);
 			return "list";
 		}
 		// 지인이름 검색

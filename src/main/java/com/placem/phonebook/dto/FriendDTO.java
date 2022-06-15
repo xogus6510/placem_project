@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PhonebookDTO {
+public class FriendDTO {
 	long frndSeq;
 	String frndNm, createdDate, modifiedDate;
 }
