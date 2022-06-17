@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FriendDTO {
 	long frndSeq;
-	String frndNm, createdDate, modifiedDate;
+	String frndNm, createdDate, modifiedDate, telNo3;
 }

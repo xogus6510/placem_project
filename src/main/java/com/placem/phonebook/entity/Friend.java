@@ -50,4 +50,6 @@ public class Friend extends BaseEntity {
 		this.modifiedDate = modifiedDate;
 	}
 	
+
+	
 }
