@@ -51,7 +51,7 @@ public class FriendController {
 			@PageableDefault(page = 0, size = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable,
 			@RequestParam(required = false, defaultValue = "")String searchtext, @RequestParam(required = false, defaultValue = "") String search) throws Exception {
 		Page<Friend> friend = friendrepository.findAll(pageable);
-		
+		service.test();
 		if (search.equals("num3")) {
 			Page<Phone> phone = phonerepository.findByTelNo3Equals(searchtext, pageable);
 			int nowPage = phone.getPageable().getPageNumber();
@@ -92,7 +92,7 @@ public class FriendController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("sizePage", sizePage);
 		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("test", service.test());
+		//model.addAttribute("test", service.test());
 		return "list";
 	}
 

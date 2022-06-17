@@ -11,9 +11,39 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 public class FriendDTO {
-	long frndSeq;
-	String frndNm, telNo3, createdDate, modifiedDate;
-	int count;
+	private long frndSeq;
+	private String frndNm, telNo3;
+	private LocalDateTime  createdDate, modifiedDate;
+	private String count;
+	
+	public FriendDTO() {}
+
+	public FriendDTO(long frndSeq, String frndNm, LocalDateTime createdDate, LocalDateTime modifiedDate, String count) {
+		super();
+		this.frndSeq = frndSeq;
+		this.frndNm = frndNm;
+		this.createdDate = createdDate;
+		this.modifiedDate = modifiedDate;
+		this.count = count;
+	}
+
+	public FriendDTO(long frndSeq, String frndNm, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+		super();
+		this.frndSeq = frndSeq;
+		this.frndNm = frndNm;
+		this.createdDate = createdDate;
+		this.modifiedDate = modifiedDate;
+	}
+
+	
+	
+
+	
+
+	
+
+	
+	
+	
 }
