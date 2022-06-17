@@ -15,11 +15,11 @@ public class FriendDTO {
 	private long frndSeq;
 	private String frndNm, telNo3;
 	private LocalDateTime  createdDate, modifiedDate;
-	private String count;
+	private Long count;
 	
 	public FriendDTO() {}
 
-	public FriendDTO(long frndSeq, String frndNm, LocalDateTime createdDate, LocalDateTime modifiedDate, String count) {
+	public FriendDTO(long frndSeq, String frndNm, LocalDateTime createdDate, LocalDateTime modifiedDate, Long count) {
 		super();
 		this.frndSeq = frndSeq;
 		this.frndNm = frndNm;
@@ -37,13 +37,5 @@ public class FriendDTO {
 	}
 
 	
-	
 
-	
-
-	
-
-	
-	
-	
 }
