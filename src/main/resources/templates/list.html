@@ -26,7 +26,14 @@ tb.landscape{
 </style>
 </head>
 <body>
-<!-- <div th:each="test : ${test}"> <div th:text="${test.count}"></div></div> -->
+
+ <div th:each="test : ${test}">
+ 	 <div th:text="${test[0]}"></div>
+ 	 <div th:text="${test[1]}"></div>
+ 	 <div th:text="${test[2]}"></div>
+ 	 <div th:text="${test[3]}"></div>
+ 	  <div th:text="${test[4]}"></div>
+  </div> 
 	<h1>지인 목록</h1>
 	<a href="http://localhost:8089/list">메인 이동</a>
 	<table>

@@ -26,27 +26,23 @@ public class FriendService {
 	
 	//mysql 쿼리문
 	//select tb_friend.frnd_seq, tb_friend.frnd_nm, tb_friend.created_date, tb_friend.modified_date, count(tb_friend.frnd_seq) from phonebookdb.tb_friend join phonebookdb.tb_phone on tb_friend.frnd_seq = tb_phone.frnd_seq where tb_phone.tel_no_3 = 6510 group by frnd_seq;
-	public String test() {
+	public List<Object[]> test() {
 		
 		ModelMapper modelMapper = new ModelMapper();
 		
 		//String jpql = "select r from Friend r";
 		//String jpql = "select m.frndSeq, m.frndNm, m.createdDate, m.modifiedDate, count(m.frndSeq) from Friend m join m.Phone t on m.frndSeq = t.frndSeq where t.telNo3 = 6510 group by m.frndSeq";
-		String jpql = "select m.frndSeq, m.frndNm,m.createdDate, m.modifiedDate, count(m.frndSeq) from Friend m join Phone t on m.frndSeq = t.friend where t.telNo3 = 6510 group by m.frndSeq";	
+		String jpql = "select m.frndSeq, m.frndNm,m.createdDate, m.modifiedDate, count(m.frndSeq) as count from Friend m join Phone t on m.frndSeq = t.friend where t.telNo3 = 6510 group by m.frndSeq";	
 		//String jpql = "select new Friend(frnd_seq) from Friend m";
 
 		//TypedQuery<FriendDTO> query = em.createQuery(jpql, FriendDTO.class);
 		Query query = em.createQuery(jpql);
 		//List<Friend> test = query.getResultList();
-		List<FriendDTO> test = query.getResultList();
-		for( Object object : test ) {
-		      Object[] results = (Object[]) object;
-		      
-		      for( Object result : results ) {
-		          System.out.print ( result );
-		     }
-		     System.out.println();
-		  }
+		List<Object[]> test = query.getResultList();
+		
+		
+		
+		
 		//System.out.println(test.get(0).getFrndNm());
 		//PhonebookDTO frienddto = modelMapper.map(query, PhonebookDTO.class);
 	    //List<FriendDTO> resultList = Arrays.asList(modelMapper.map(test,FriendDTO[].class));
@@ -63,7 +59,7 @@ public class FriendService {
 		//System.out.println(test.get(0).getFrndNm());
 		
 		
-		return "test";
+		return test;
 	}
 	
 	
