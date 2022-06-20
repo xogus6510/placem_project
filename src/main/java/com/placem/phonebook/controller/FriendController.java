@@ -1,13 +1,11 @@
 package com.placem.phonebook.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
-import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,7 +43,7 @@ public class FriendController {
 	@Autowired
 	FriendService service;
 
-	// 전화번호부 목록
+	// 전화번호부 목록s
 	@GetMapping("/list")
 	public String list(Model model,
 			@PageableDefault(page = 0, size = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable,
@@ -58,11 +56,13 @@ public class FriendController {
 			int sizePage = phone.getPageable().getPageSize();
 			int endPage = phone.getTotalPages() - 1;
 			int totalPage = friend.getTotalPages();
+			//System.out.println(nowPage + "/" + sizePage +"/" + endPage +"/" + totalPage);
 			model.addAttribute("friendlist", phone);
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("sizePage", sizePage);
-			model.addAttribute("test", service.test(searchtext));
+			List<FriendDTO> num3list = service.num3Search(searchtext, pageable);
+			model.addAttribute("friendlist2", num3list);
 			model.addAttribute("num3", "num3");
 			return "list";
 		}
