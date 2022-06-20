@@ -52,17 +52,19 @@ public class FriendController {
 		
 		if (search.equals("num3")) {
 			Page<Phone> phone = phonerepository.findByTelNo3Equals(searchtext, pageable);
-			int nowPage = phone.getPageable().getPageNumber();
-			int sizePage = phone.getPageable().getPageSize();
-			int endPage = phone.getTotalPages() - 1;
-			int totalPage = friend.getTotalPages();
-			//System.out.println(nowPage + "/" + sizePage +"/" + endPage +"/" + totalPage);
-			model.addAttribute("friendlist", phone);
+			List<FriendDTO> num3list = service.num3Search(searchtext, pageable);
+			int nowPage = pageable.getPageNumber();
+			int sizePage = pageable.getPageSize();
+			int endPage = (num3list.size() / sizePage);
+			int totalPage = (num3list.size() / sizePage);
+			System.out.println(nowPage + "/" + sizePage +"/" + endPage +"/");
+	
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("endPage", endPage);
 			model.addAttribute("sizePage", sizePage);
-			List<FriendDTO> num3list = service.num3Search(searchtext, pageable);
+			System.out.println((num3list.size() / sizePage) + "size");
 			model.addAttribute("friendlist2", num3list);
+			model.addAttribute("totalPage", totalPage);
 			model.addAttribute("num3", "num3");
 			return "list";
 		}
